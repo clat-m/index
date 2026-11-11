@@ -67,6 +67,9 @@ summary{font-weight:700;cursor:pointer}
 <p class="note" style="margin-top:14px">★オーダーメイド商品につき、デザイン確定後の変更や商品到着後のデザイン変更等、お客様のご都合による返品・交換はご遠慮ください。<br>★お申込み後の商品／カラー／サイズ枚数の変更、およびキャンセルは原則できませんのでご注意ください。</p>
 <p class="msg" id="oerr" style="margin:10px 0"></p>
 <button class="btn blue" onclick="sendOrder()">LINEで注文内容を送る</button>
+<button type="button" class="add" style="width:100%" onclick="copyOrder()">LINEが開かない場合：内容をコピーする</button>
+<p class="note" id="cmsg"></p>
+<textarea id="cbox" hidden readonly></textarea>
 <p class="note">LINEが開き、内容が入力された状態になります。送信ボタンを押すと注文の申し込みが届きます。デザイン画像やロゴは、LINEのトークに続けて送ってください。</p>
 </div>
 <p class="note">※ 表示は概算です。掲載の枚数帯以外はお問い合わせください。</p>
@@ -209,7 +212,7 @@ const cnt = s => Object.keys(s).reduce((a, k) => a + s[k], 0);
 function sumSizes(){ const sum = rowsC().reduce((a, r) => a + cnt(r.s), 0); $("ssum").textContent = "合計 " + sum + "枚 / 注文 " + (LAST ? LAST.q : 0) + "枚"; return sum; }
 $("ofields").addEventListener("input", sumSizes);
 function openOrder(){ $("orderBox").hidden = false; if (!document.querySelector(".crow")) addColor(); sumSizes(); $("orderBox").scrollIntoView({behavior: "smooth"}); }
-function sendOrder(){
+function buildMsg(){
 const err = $("oerr"); err.textContent = "";
 if (!LAST){ err.textContent = "先に見積を出してください。"; return; }
 const f = {}; FLD.forEach(x => { const v = getV(x); if (Array.isArray(v) ? v.length : v) f[x[0]] = v; });
@@ -228,7 +231,17 @@ let msg = "【クラTマガジン】ご注文\n学校名：" + f.school + "（" 
 "\nお届け希望：" + (f.asap ? "出来上がり次第OK" : (fmtD(f.want) || "未入力")) + "\nご使用日：" + (fmtD(f.use) || "未入力") + "\nカラー・サイズ：" + cs;
 const skip = ["school", "cls", "rep", "mob", "want", "use", "asap"];
 msg += (d.w === "80" ? "\n注文時期：超早割" : d.w === "50" ? "\n注文時期：早割" : "") + "\n" + FLD.filter(x => f[x[0]] && skip.indexOf(x[0]) < 0).map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n") + (ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(z) : "");
-window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(msg), "_blank");
+return msg;
+}
+function sendOrder(){ const m = buildMsg(); if (m) window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(m), "_blank"); }
+function copyOrder(){
+  const m = buildMsg(); if (!m) return;
+  const box = $("cbox"), say = t => { $("cmsg").textContent = t; };
+  box.hidden = false; box.value = m;
+  const done = () => say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。");
+  const manual = () => say("下の枠の文章を全選択してコピーし、公式LINEのトーク画面に貼り付けて送信してください。");
+  const fb = () => { box.select(); try { document.execCommand("copy") ? done() : manual(); } catch (e) { manual(); } };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(m).then(done, fb); else fb();
 }
 $("prod").addEventListener("input", buildForm);
 $("qty").addEventListener("input", calc);
