@@ -226,7 +226,8 @@ const z = {p: d.pn, q: d.q, t: d.t, w: d.w, d: d.d, c: c.map(r => [r.c, r.s]), f
 FLD.forEach((x, i) => { if (f[x[0]]) z.f[i] = f[x[0]]; });
 let msg = "【クラTマガジン】ご注文\n学校名：" + f.school + "（" + (f.cls || "") + "）\n代表者：" + f.rep + "　携帯：" + f.mob + "\n商品：" + d.pn + "／" + d.q + "枚　概算：" + yen(d.t) +
 "\nお届け希望：" + (f.asap ? "出来上がり次第OK" : (fmtD(f.want) || "未入力")) + "\nご使用日：" + (fmtD(f.use) || "未入力") + "\nカラー・サイズ：" + cs;
-msg += ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(z) : "\n" + FLD.filter(x => f[x[0]] && x[0] !== "school").map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n");
+const skip = ["school", "cls", "rep", "mob", "want", "use", "asap"];
+msg += (d.w === "80" ? "\n注文時期：超早割" : d.w === "50" ? "\n注文時期：早割" : "") + "\n" + FLD.filter(x => f[x[0]] && skip.indexOf(x[0]) < 0).map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n") + (ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(z) : "");
 window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(msg), "_blank");
 }
 $("prod").addEventListener("input", buildForm);
