@@ -6,9 +6,7 @@
 <title>クラTマガジン自動見積</title>
 <style>
 :root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}
 main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
@@ -83,11 +81,10 @@ summary{font-weight:700;cursor:pointer}
 <p class="note">※ 表示は概算です。掲載の枚数帯以外はお問い合わせください。</p>
 </main>
 <script>
-// 料金データ（税込・1枚あたり）。Excel「クラT価格2026」から作成
-const DATA = [{"n": "ドライTシャツ", "t": "std", "plain": 500, "tiers": [[20, 29, [1300, 1800, 2300, 2800], 1400], [30, 49, [1100, 1450, 1800, 2150], 1200], [50, 99, [1050, 1400, 1750, 2100], 1100], [100, 199, [950, 1200, 1450, 1700], 1000]]}, {"n": "ベースボールシャツ", "t": "std", "plain": 1200, "tiers": [[20, 29, [2000, 2500, 3000, 3500], 1400], [30, 49, [1800, 2150, 2500, 2850], 1200], [50, 99, [1750, 2100, 2450, 2800], 1100], [100, 199, [1650, 1900, 2150, 2400], 1000]], "sur": ["ストライプ・迷彩生地", 300]}, {"n": "バスケビブス", "t": "std", "plain": 1100, "tiers": [[20, 29, [1900, 2400, 2900, 3400], 1400], [30, 49, [1700, 2050, 2400, 2750], 1200], [50, 99, [1650, 2000, 2350, 2700], 1100], [100, 199, [1550, 1800, 2050, 2300], 1000]]}, {"n": "フットボールシャツ", "t": "std", "plain": 1000, "tiers": [[20, 29, [1800, 2300, 2800, 3300], 1400], [30, 49, [1600, 1950, 2300, 2650], 1200], [50, 99, [1550, 1900, 2250, 2600], 1100], [100, 199, [1450, 1700, 1950, 2200], 1000]]}, {"n": "ライトドライTシャツ", "t": "std", "plain": 450, "tiers": [[20, 29, [1250, 1750, 2250, 2750], 1400], [30, 49, [1050, 1400, 1750, 2100], 1200], [50, 99, [1000, 1350, 1700, 2050], 1100], [100, 199, [900, 1150, 1400, 1650], 1000]]}, {"n": "ドライシルキーTシャツ", "t": "std", "plain": 700, "tiers": [[20, 29, [1500, 2000, 2500, 3000], 1400], [30, 49, [1300, 1650, 2000, 2350], 1200], [50, 99, [1250, 1600, 1950, 2300], 1100], [100, 199, [1150, 1400, 1650, 1900], 1000]]}, {"n": "ヘビーウェイトTシャツ", "t": "std", "plain": 650, "tiers": [[20, 29, [1450, 1950, 2450, 2950], 1400], [30, 49, [1250, 1600, 1950, 2300], 1200], [50, 99, [1200, 1550, 1900, 2250], 1100], [100, 199, [1100, 1350, 1600, 1850], 1000]]}, {"n": "スタンダードTシャツ", "t": "std", "plain": 500, "tiers": [[20, 29, [1300, 1800, 2300, 2800], 1400], [30, 49, [1100, 1450, 1800, 2150], 1200], [50, 99, [1050, 1400, 1750, 2100], 1100], [100, 199, [950, 1200, 1450, 1700], 1000]]}, {"n": "ドライポロシャツ", "t": "std", "plain": 850, "tiers": [[20, 29, [1650, 2150, 2650, 3150], 1400], [30, 49, [1450, 1800, 2150, 2500], 1200], [50, 99, [1400, 1750, 2100, 2450], 1100], [100, 199, [1300, 1550, 1800, 2050], 1000]]}, {"n": "ドライレイヤードポロ", "t": "std", "plain": 1000, "tiers": [[20, 29, [1800, 2300, 2800, 3300], 1400], [30, 49, [1600, 1950, 2300, 2650], 1200], [50, 99, [1550, 1900, 2250, 2600], 1100], [100, 199, [1450, 1700, 1950, 2200], 1000]]}, {"n": "ドライカノコポロシャツ", "t": "std", "plain": 1000, "tiers": [[20, 29, [1800, 2300, 2800, 3300], 1400], [30, 49, [1600, 1950, 2300, 2650], 1200], [50, 99, [1550, 1900, 2250, 2600], 1100], [100, 199, [1450, 1700, 1950, 2200], 1000]]}, {"n": "アクティブドライポロ", "t": "std", "plain": 1500, "tiers": [[20, 29, [2300, 2800, 3300, 3800], 1400], [30, 49, [2100, 2450, 2800, 3150], 1200], [50, 99, [2050, 2400, 2750, 3100], 1100], [100, 199, [1950, 2200, 2450, 2700], 1000]]}, {"n": "ラグランTシャツ", "t": "std", "plain": 800, "tiers": [[20, 29, [1600, 2100, 2600, 3100], 1400], [30, 49, [1400, 1750, 2100, 2450], 1200], [50, 99, [1350, 1700, 2050, 2400], 1100], [100, 199, [1250, 1500, 1750, 2000], 1000]]}, {"n": "グラデーションTシャツ", "t": "std", "plain": 200, "tiers": [[20, 29, [1000, 1500, 2000, 2500], 1400], [30, 49, [800, 1150, 1500, 1850], 1200], [50, 99, [750, 1100, 1450, 1800], 1100], [100, 199, [650, 900, 1150, 1400], 1000]]}, {"n": "ドライロングスリーブTシャツ", "t": "std", "plain": 700, "tiers": [[20, 29, [1500, 2000, 2500, 3000], 1400], [30, 49, [1300, 1650, 2000, 2350], 1200], [50, 99, [1250, 1600, 1950, 2300], 1100], [100, 199, [1150, 1400, 1650, 1900], 1000]]}, {"n": "ロングスリーブTシャツ", "t": "std", "plain": 1000, "tiers": [[20, 29, [1800, 2300, 2800, 3300], 1400], [30, 49, [1600, 1950, 2300, 2650], 1200], [50, 99, [1550, 1900, 2250, 2600], 1100], [100, 199, [1450, 1700, 1950, 2200], 1000]]}, {"n": "パーカ", "t": "std", "plain": 2000, "tiers": [[20, 29, [2800, 3300, 3800, 4300], 1400], [30, 49, [2600, 2950, 3300, 3650], 1200], [50, 99, [2550, 2900, 3250, 3600], 1100], [100, 199, [2450, 2700, 2950, 3200], 1000]]}, {"n": "ジップパーカ", "t": "std", "plain": 2400, "tiers": [[20, 29, [3200, 3700, 4200, 4700], 1400], [30, 49, [3000, 3350, 3700, 4050], 1200], [50, 99, [2950, 3300, 3650, 4000], 1100], [100, 199, [2850, 3100, 3350, 3600], 1000]]}, {"n": "裏起毛パーカ", "t": "std", "plain": 2400, "tiers": [[20, 29, [3200, 3700, 4200, 4700], 1400], [30, 49, [3000, 3350, 3700, 4050], 1200], [50, 99, [2950, 3300, 3650, 4000], 1100], [100, 199, [2850, 3100, 3350, 3600], 1000]]}, {"n": "裏起毛ジップパーカ", "t": "std", "plain": 2800, "tiers": [[20, 29, [3600, 4100, 4600, 5100], 1400], [30, 49, [3400, 3750, 4100, 4450], 1200], [50, 99, [3350, 3700, 4050, 4400], 1100], [100, 199, [3250, 3500, 3750, 4000], 1000]]}, {"n": "トレーナ", "t": "std", "plain": 1600, "tiers": [[20, 29, [2400, 2900, 3400, 3900], 1400], [30, 49, [2200, 2550, 2900, 3250], 1200], [50, 99, [2150, 2500, 2850, 3200], 1100], [100, 199, [2050, 2300, 2550, 2800], 1000]]}, {"n": "スウェットパンツ", "t": "std", "plain": 1700, "tiers": [[20, 29, [2500, 3000, 3500, 4000], 1400], [30, 49, [2300, 2650, 3000, 3350], 1200], [50, 99, [2250, 2600, 2950, 3300], 1100], [100, 199, [2150, 2400, 2650, 2900], 1000]]}, {"n": "スタッフジャケット", "t": "std", "plain": 2000, "tiers": [[20, 29, [2800, 3300, 3800, 4300], 1400], [30, 49, [2600, 2950, 3300, 3650], 1200], [50, 99, [2550, 2900, 3250, 3600], 1100], [100, 199, [2450, 2700, 2950, 3200], 1000]]}, {"n": "ジャージ", "t": "std", "plain": 3600, "tiers": [[20, 29, [4400, 4900, 5400, 5900], 1400], [30, 49, [4200, 4550, 4900, 5250], 1200], [50, 99, [4150, 4500, 4850, 5200], 1100], [100, 199, [4050, 4300, 4550, 4800], 1000]]}, {"n": "ジャージパンツ", "t": "std", "plain": 2900, "tiers": [[20, 29, [3700, 4200, 4700, 5200], 1400], [30, 49, [3500, 3850, 4200, 4550], 1200], [50, 99, [3450, 3800, 4150, 4500], 1100], [100, 199, [3350, 3600, 3850, 4100], 1000]]}, {"n": "コットントート", "t": "std", "plain": 200, "tiers": [[20, 29, [1000, 1500, 2000, 2500], 1400], [30, 49, [800, 1150, 1500, 1850], 1200], [50, 99, [750, 1100, 1450, 1800], 1100], [100, 199, [650, 900, 1150, 1400], 1000]]}, {"n": "ナップサック", "t": "std", "plain": 400, "tiers": [[20, 29, [1200, 1700, 2200, 2700], 1400], [30, 49, [1000, 1350, 1700, 2050], 1200], [50, 99, [950, 1300, 1650, 2000], 1100], [100, 199, [850, 1100, 1350, 1600], 1000]]}, {"n": "ハッピ", "t": "std", "plain": 2000, "tiers": [[20, 29, [2800, 3300, 3800, 4300], 1400], [30, 49, [2600, 2950, 3300, 3650], 1200], [50, 99, [2550, 2900, 3250, 3600], 1100], [100, 199, [2450, 2700, 2950, 3200], 1000]]}, {"n": "ふるプリTシャツ", "all": true, "t": "opt", "opts": ["通常", "3Lサイズ", "ネーム or 番号あり", "3L＋ネーム or 番号あり"], "tiers": [[20, 49, [2700, 3200, 3000, 3500]], [50, 99, [2500, 3000, 2800, 3300]], [100, 199, [2400, 2900, 2700, 3200]]], "note": "サイズ・ネームも込みの料金です。"}, {"n": "ふるプリビブス", "all": true, "t": "opt", "opts": ["通常", "3Lサイズ", "ネーム or 番号あり", "3L＋ネーム or 番号あり"], "tiers": [[20, 49, [2900, 3400, 3200, 3700]], [50, 99, [2700, 3200, 3000, 3500]], [100, 199, [2600, 3100, 2900, 3400]]], "note": "サイズ・ネームも込みの料金です。"}, {"n": "ゲームシャツ", "t": "opt", "opts": ["片面プリント", "背ネーム・背番号", "片面プリント＋ネーム・背番号"], "tiers": [[20, 99, [1600, 1800, 2200]]], "note": "20〜99枚の料金です。100枚以上はお問い合わせください。"}, {"n": "スポーツシャツ", "t": "opt", "opts": ["背ネームor背番号", "背ネーム・背番号"], "tiers": [[1, 99, [2500, 3000]]], "note": "1〜99枚の料金です。100枚以上はお問い合わせください。"}];
+const DATA = [{"n":"ドライTシャツ","t":"std","plain":500,"tiers":[[20,29,[1300,1800,2300,2800],1400],[30,49,[1100,1450,1800,2150],1200],[50,99,[1050,1400,1750,2100],1100],[100,199,[950,1200,1450,1700],1000]]},{"n":"ベースボールシャツ","t":"std","plain":1200,"tiers":[[20,29,[2000,2500,3000,3500],1400],[30,49,[1800,2150,2500,2850],1200],[50,99,[1750,2100,2450,2800],1100],[100,199,[1650,1900,2150,2400],1000]],"sur":["ストライプ・迷彩生地",300]},{"n":"バスケビブス","t":"std","plain":1100,"tiers":[[20,29,[1900,2400,2900,3400],1400],[30,49,[1700,2050,2400,2750],1200],[50,99,[1650,2000,2350,2700],1100],[100,199,[1550,1800,2050,2300],1000]]},{"n":"フットボールシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"ライトドライTシャツ","t":"std","plain":450,"tiers":[[20,29,[1250,1750,2250,2750],1400],[30,49,[1050,1400,1750,2100],1200],[50,99,[1000,1350,1700,2050],1100],[100,199,[900,1150,1400,1650],1000]]},{"n":"ドライシルキーTシャツ","t":"std","plain":700,"tiers":[[20,29,[1500,2000,2500,3000],1400],[30,49,[1300,1650,2000,2350],1200],[50,99,[1250,1600,1950,2300],1100],[100,199,[1150,1400,1650,1900],1000]]},{"n":"ヘビーウェイトTシャツ","t":"std","plain":650,"tiers":[[20,29,[1450,1950,2450,2950],1400],[30,49,[1250,1600,1950,2300],1200],[50,99,[1200,1550,1900,2250],1100],[100,199,[1100,1350,1600,1850],1000]]},{"n":"スタンダードTシャツ","t":"std","plain":500,"tiers":[[20,29,[1300,1800,2300,2800],1400],[30,49,[1100,1450,1800,2150],1200],[50,99,[1050,1400,1750,2100],1100],[100,199,[950,1200,1450,1700],1000]]},{"n":"ドライポロシャツ","t":"std","plain":850,"tiers":[[20,29,[1650,2150,2650,3150],1400],[30,49,[1450,1800,2150,2500],1200],[50,99,[1400,1750,2100,2450],1100],[100,199,[1300,1550,1800,2050],1000]]},{"n":"ドライレイヤードポロ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"ドライカノコポロシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"アクティブドライポロ","t":"std","plain":1500,"tiers":[[20,29,[2300,2800,3300,3800],1400],[30,49,[2100,2450,2800,3150],1200],[50,99,[2050,2400,2750,3100],1100],[100,199,[1950,2200,2450,2700],1000]]},{"n":"ラグランTシャツ","t":"std","plain":800,"tiers":[[20,29,[1600,2100,2600,3100],1400],[30,49,[1400,1750,2100,2450],1200],[50,99,[1350,1700,2050,2400],1100],[100,199,[1250,1500,1750,2000],1000]]},{"n":"グラデーションTシャツ","t":"std","plain":200,"tiers":[[20,29,[1000,1500,2000,2500],1400],[30,49,[800,1150,1500,1850],1200],[50,99,[750,1100,1450,1800],1100],[100,199,[650,900,1150,1400],1000]]},{"n":"ドライロングスリーブTシャツ","t":"std","plain":700,"tiers":[[20,29,[1500,2000,2500,3000],1400],[30,49,[1300,1650,2000,2350],1200],[50,99,[1250,1600,1950,2300],1100],[100,199,[1150,1400,1650,1900],1000]]},{"n":"ロングスリーブTシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"パーカ","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ジップパーカ","t":"std","plain":2400,"tiers":[[20,29,[3200,3700,4200,4700],1400],[30,49,[3000,3350,3700,4050],1200],[50,99,[2950,3300,3650,4000],1100],[100,199,[2850,3100,3350,3600],1000]]},{"n":"裏起毛パーカ","t":"std","plain":2400,"tiers":[[20,29,[3200,3700,4200,4700],1400],[30,49,[3000,3350,3700,4050],1200],[50,99,[2950,3300,3650,4000],1100],[100,199,[2850,3100,3350,3600],1000]]},{"n":"裏起毛ジップパーカ","t":"std","plain":2800,"tiers":[[20,29,[3600,4100,4600,5100],1400],[30,49,[3400,3750,4100,4450],1200],[50,99,[3350,3700,4050,4400],1100],[100,199,[3250,3500,3750,4000],1000]]},{"n":"トレーナ","t":"std","plain":1600,"tiers":[[20,29,[2400,2900,3400,3900],1400],[30,49,[2200,2550,2900,3250],1200],[50,99,[2150,2500,2850,3200],1100],[100,199,[2050,2300,2550,2800],1000]]},{"n":"スウェットパンツ","t":"std","plain":1700,"tiers":[[20,29,[2500,3000,3500,4000],1400],[30,49,[2300,2650,3000,3350],1200],[50,99,[2250,2600,2950,3300],1100],[100,199,[2150,2400,2650,2900],1000]]},{"n":"スタッフジャケット","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ジャージ","t":"std","plain":3600,"tiers":[[20,29,[4400,4900,5400,5900],1400],[30,49,[4200,4550,4900,5250],1200],[50,99,[4150,4500,4850,5200],1100],[100,199,[4050,4300,4550,4800],1000]]},{"n":"ジャージパンツ","t":"std","plain":2900,"tiers":[[20,29,[3700,4200,4700,5200],1400],[30,49,[3500,3850,4200,4550],1200],[50,99,[3450,3800,4150,4500],1100],[100,199,[3350,3600,3850,4100],1000]]},{"n":"コットントート","t":"std","plain":200,"tiers":[[20,29,[1000,1500,2000,2500],1400],[30,49,[800,1150,1500,1850],1200],[50,99,[750,1100,1450,1800],1100],[100,199,[650,900,1150,1400],1000]]},{"n":"ナップサック","t":"std","plain":400,"tiers":[[20,29,[1200,1700,2200,2700],1400],[30,49,[1000,1350,1700,2050],1200],[50,99,[950,1300,1650,2000],1100],[100,199,[850,1100,1350,1600],1000]]},{"n":"ハッピ","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ふるプリTシャツ","all":true,"t":"opt","opts":["通常","3Lサイズ","ネーム or 番号あり","3L＋ネーム or 番号あり"],"tiers":[[20,49,[2700,3200,3000,3500]],[50,99,[2500,3000,2800,3300]],[100,199,[2400,2900,2700,3200]]],"note":"サイズ・ネームも込みの料金です。"},{"n":"ふるプリビブス","all":true,"t":"opt","opts":["通常","3Lサイズ","ネーム or 番号あり","3L＋ネーム or 番号あり"],"tiers":[[20,49,[2900,3400,3200,3700]],[50,99,[2700,3200,3000,3500]],[100,199,[2600,3100,2900,3400]]],"note":"サイズ・ネームも込みの料金です。"},{"n":"ゲームシャツ","t":"opt","opts":["片面プリント","背ネーム・背番号","片面プリント＋ネーム・背番号"],"tiers":[[20,99,[1600,1800,2200]]],"note":"20〜99枚の料金です。100枚以上はお問い合わせください。"},{"n":"スポーツシャツ","t":"opt","opts":["背ネームor背番号","背ネーム・背番号"],"tiers":[[1,99,[2500,3000]]],"note":"1〜99枚の料金です。100枚以上はお問い合わせください。"}];
 const WARN = '<p class="warn">【ご注意】26枚以上のご注文は、1枚分が無料になります。ご入力の枚数は、無料分を含めた「お手元に届けたい枚数」です。（例：26枚と入力 → お支払いは25枚分）</p>';
-const SHEET_URL = ""; // 注文書を開くページのURL（自社で置いたページのURL）。空欄のときは、いま開いているページのURLを使う
-const LINE_ID = "@clat-m"; // 公式LINEのID（@付き）。違う場合はここを書き換える
+const SHEET_URL = "https://clat-m.github.io/index/";
+const LINE_ID = "@clat-m";
 let LAST = null;
 const SIZES = ["150","SS","S","M","L","LL","3L","4L","5L","6L","7L"];
 const esc = t => String(t == null ? "" : t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -98,130 +95,124 @@ const PRINTS = ["片面1色","片面2色 / 両面1色ずつ","片面3色 / 片�
 const $ = id => document.getElementById(id);
 const yen = n => "¥" + Math.round(n).toLocaleString("ja-JP");
 const num = id => $(id) ? Math.max(0, parseInt($(id).value, 10) || 0) : 0;
-
 DATA.forEach((p, i) => $("prod").add(new Option(p.n, i)));
-
 function buildForm(){
-  const p = DATA[$("prod").value];
-  let h = "";
-  if (p.t === "std"){
-    h += '<label for="print">プリント内容</label><select id="print">' + PRINTS.map((x,i)=>'<option value="'+i+'">'+x+'</option>').join("") + '</select>';
-    h += '<label for="when">注文時期</label><select id="when"><option value="0">通常</option><option value="50">早割（納期の14日前まで）-50円/枚</option><option value="80">超早割（納期の20日前まで）-80円/枚</option></select>';
-    if (p.sur) h += '<label><input type="checkbox" id="sur">' + p.sur[0] + '（+' + p.sur[1] + '円/枚）</label>';
-    h += '<label>オプション <span class="hint">合計枚数のうち何枚か</span></label><div class="row">' +
-      '<div><div class="hint">3L〜5L（+100円）</div><input id="s3" type="number" inputmode="numeric" min="0" value="0"></div>' +
-      '<div><div class="hint">6L〜7L（+200円）</div><input id="s6" type="number" inputmode="numeric" min="0" value="0"></div>' +
-      '<div><div class="hint">ミックスカラー（+100円）</div><input id="mix" type="number" inputmode="numeric" min="0" value="0"></div>' +
-      '<div><div class="hint">ネーム＋ゼッケン（+1,300円）</div><input id="name" type="number" inputmode="numeric" min="0" value="0"><label style="margin:6px 0 0;font-weight:400"><input type="checkbox" id="nameall">すべて</label></div></div>';
-  } else {
-    h += '<label>内訳 <span class="hint">合計枚数の内訳を入れてください</span></label><div class="row">' +
-      p.opts.map((o,i)=> i === 0
-        ? '<div><div class="hint">' + o + '（残り全部）</div><input id="o0" disabled></div>'
-        : '<div><div class="hint">' + o + '</div><input id="o' + i + '" type="number" inputmode="numeric" min="0" value="0"></div>').join("") + '</div>';
-    if (p.all) h += '<label><input type="checkbox" id="allname">ネーム or 番号あり：すべて</label>';
-    if (p.all) h += '<p class="note">1枚でも背ネーム・背番号が入る場合は、全枚数がネーム or 番号ありの単価になります。</p>';
-    if (p.note) h += '<p class="note">' + p.note + '</p>';
-  }
-  $("dyn").innerHTML = h;
-  $("dyn").querySelectorAll("input,select").forEach(e => e.addEventListener("input", calc));
-  calc();
+const p = DATA[$("prod").value];
+let h = "";
+if (p.t === "std"){
+h += '<label for="print">プリント内容</label><select id="print">' + PRINTS.map((x,i)=>'<option value="'+i+'">'+x+'</option>').join("") + '</select>';
+h += '<label for="when">注文時期</label><select id="when"><option value="0">通常</option><option value="50">早割（納期の14日前まで）-50円/枚</option><option value="80">超早割（納期の20日前まで）-80円/枚</option></select>';
+if (p.sur) h += '<label><input type="checkbox" id="sur">' + p.sur[0] + '（+' + p.sur[1] + '円/枚）</label>';
+h += '<label>オプション <span class="hint">合計枚数のうち何枚か</span></label><div class="row">' +
+'<div><div class="hint">3L〜5L（+100円）</div><input id="s3" type="number" inputmode="numeric" min="0" value="0"></div>' +
+'<div><div class="hint">6L〜7L（+200円）</div><input id="s6" type="number" inputmode="numeric" min="0" value="0"></div>' +
+'<div><div class="hint">ミックスカラー（+100円）</div><input id="mix" type="number" inputmode="numeric" min="0" value="0"></div>' +
+'<div><div class="hint">ネーム＋ゼッケン（+1,300円）</div><input id="name" type="number" inputmode="numeric" min="0" value="0"><label style="margin:6px 0 0;font-weight:400"><input type="checkbox" id="nameall">すべて</label></div></div>';
+} else {
+h += '<label>内訳 <span class="hint">合計枚数の内訳を入れてください</span></label><div class="row">' +
+p.opts.map((o,i)=> i === 0
+? '<div><div class="hint">' + o + '（残り全部）</div><input id="o0" disabled></div>'
+: '<div><div class="hint">' + o + '</div><input id="o' + i + '" type="number" inputmode="numeric" min="0" value="0"></div>').join("") + '</div>';
+if (p.all) h += '<label><input type="checkbox" id="allname">ネーム or 番号あり：すべて</label>';
+if (p.all) h += '<p class="note">1枚でも背ネーム・背番号が入る場合は、全枚数がネーム or 番号ありの単価になります。</p>';
+if (p.note) h += '<p class="note">' + p.note + '</p>';
 }
-
+$("dyn").innerHTML = h;
+$("dyn").querySelectorAll("input,select").forEach(e => e.addEventListener("input", calc));
+calc();
+}
 function calc(){
-  const p = DATA[$("prod").value], qty = num("qty"), out = $("out");
-  $("qnote").innerHTML = qty >= 26 ? "" : '<p class="hint">26枚以上のご注文で、1枚分が無料になります。</p>';
-  const t = p.tiers.find(x => qty >= x[0] && qty <= x[1]);
-  if (!t){
-    out.innerHTML = '<p class="msg">この枚数の場合はお問い合わせください。</p>';
-    return;
-  }
-  let rows = [], freeV = 0;
-  if (p.t === "std"){
-    const k = p.tiers.indexOf(t), pr = parseInt($("print").value, 10), disc = parseInt($("when").value, 10);
-    const full = pr === 4;
-    let base = full ? p.plain + t[3] : t[2][pr];
-    const sur = $("sur") && $("sur").checked ? p.sur[1] : 0;
-    const s3 = num("s3"), s6 = num("s6"), mix = num("mix"), nmAll = $("nameall").checked;
-    $("name").disabled = nmAll; if (nmAll) $("name").value = qty;
-    const nm = nmAll ? qty : num("name");
-    if (s3 + s6 > qty || mix > qty || nm > qty){ out.innerHTML = '<p class="msg">オプションの枚数が注文枚数を超えています。</p>'; return; }
-    rows.push([(full ? "片面フルカラー" : PRINTS[pr]) + "（" + qty + "枚 × " + yen(base) + "）", base * qty]);
-    if (sur) rows.push([p.sur[0] + "（" + qty + "枚）", sur * qty]);
-    if (disc) rows.push([(disc === 50 ? "早割" : "超早割") + "（" + qty + "枚 × -" + disc + "円）", -disc * qty]);
-    if (s3) rows.push(["3L〜5L（" + s3 + "枚）", s3 * EXTRA.size3]);
-    if (s6) rows.push(["6L〜7L（" + s6 + "枚）", s6 * EXTRA.size6]);
-    if (mix) rows.push(["ミックスカラー（" + mix + "枚）", mix * EXTRA.mix]);
-    if (nm) rows.push(["ネーム＋ゼッケン（" + nm + "枚）", nm * EXTRA.name]);
-    // 無料になる1枚＝最も単価が高い1枚（オプションの重なりは考慮せず、少なめに見積る）
-    const sz = s3 + s6 === qty ? (s6 === 0 ? EXTRA.size3 : s3 === 0 ? EXTRA.size6 : EXTRA.size3) : 0;
-    const forced = (nm === qty ? EXTRA.name : 0) + (mix === qty ? EXTRA.mix : 0) + sz;
-    const singles = [nm && nm < qty ? EXTRA.name : 0, mix && mix < qty ? EXTRA.mix : 0, s6 && s3 + s6 < qty ? EXTRA.size6 : 0, s3 && s3 + s6 < qty ? EXTRA.size3 : 0];
-    freeV = base - disc + sur + forced + Math.max(...singles);
-  } else {
-    let rest = qty, cnt = [];
-    const allN = !!(p.all && $("allname").checked);
-    for (let i = 1; i < p.opts.length; i++){
-      if (p.all && i >= 2){ $("o" + i).disabled = allN; if (allN) $("o" + i).value = 0; }
-      cnt[i] = (allN && i >= 2) ? 0 : num("o" + i); rest -= cnt[i];
-    }
-    if (rest < 0){ out.innerHTML = '<p class="msg">内訳の枚数が注文枚数を超えています。</p>'; return; }
-    cnt[0] = rest; $("o0").value = rest;
-    const prc = t[2].slice(), lab = p.opts.slice();
-    if (p.all && (allN || cnt[2] + cnt[3] > 0)){ prc[0] = t[2][2]; prc[1] = t[2][3]; lab[0] = "通常サイズ（ネーム or 番号あり単価）"; lab[1] = "3Lサイズ（ネーム or 番号あり単価）"; }
-    p.opts.forEach((o,i) => { if (cnt[i]) rows.push([lab[i] + "（" + cnt[i] + "枚 × " + yen(prc[i]) + "）", cnt[i] * prc[i]]); });
-    freeV = Math.max(0, ...prc.filter((x, i) => cnt[i] > 0));
-  }
-  if (qty >= 26 && freeV > 0) rows.push(["26枚以上のご注文：1枚分無料（最も高い1枚）", -freeV]);
-  const total = rows.reduce((s, r) => s + r[1], 0);
-  LAST = {pn: p.n, q: qty, r: rows, t: total, w: $("when") ? $("when").value : "0"};
-  $("osum").innerHTML = "見積：" + esc(p.n) + "／" + qty + "枚／概算 " + yen(total) + "（税込）";
-  const msg = "【クラTマガジン】見積の問い合わせ\n商品：" + p.n + "\n枚数：" + qty + "枚\n" +
-    rows.map(r => "・" + r[0] + "：" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1]))).join("\n") +
-    "\n概算合計（税込）：" + yen(total) + "\n※自動見積の概算です。";
-  const orderBtn = '<button class="btn blue" onclick="openOrder()">この内容で注文する</button>';
-  const lineBtn = '<a class="btn" target="_blank" rel="noopener" href="https://line.me/R/oaMessage/' + encodeURIComponent(LINE_ID) + '/?' + encodeURIComponent(msg) + '">この内容で問い合わせる（LINE）</a>' +
-    '<p class="note">LINEが開き、見積内容が入力された状態になります。送信ボタンを押すと送られます。</p>';
-  out.innerHTML = '<p class="total">' + yen(total) + '</p><p class="per">税込 ／ 1枚あたり平均 ' + yen(total / qty) + '</p>' + (qty >= 26 ? WARN : '') +
-    '<table>' + rows.map(r => '<tr><td>' + r[0] + '</td><td>' + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + '</td></tr>').join("") + '</table><p class="note">通常インクの場合の金額になります。特殊インクをご使用の場合は別途料金がかかります。</p>' + orderBtn + lineBtn;
+const p = DATA[$("prod").value], qty = num("qty"), out = $("out");
+$("qnote").innerHTML = qty >= 26 ? "" : '<p class="hint">26枚以上のご注文で、1枚分が無料になります。</p>';
+const t = p.tiers.find(x => qty >= x[0] && qty <= x[1]);
+if (!t){
+out.innerHTML = '<p class="msg">この枚数の場合はお問い合わせください。</p>';
+return;
+}
+let rows = [], freeV = 0;
+if (p.t === "std"){
+const k = p.tiers.indexOf(t), pr = parseInt($("print").value, 10), disc = parseInt($("when").value, 10);
+const full = pr === 4;
+let base = full ? p.plain + t[3] : t[2][pr];
+const sur = $("sur") && $("sur").checked ? p.sur[1] : 0;
+const s3 = num("s3"), s6 = num("s6"), mix = num("mix"), nmAll = $("nameall").checked;
+$("name").disabled = nmAll; if (nmAll) $("name").value = qty;
+const nm = nmAll ? qty : num("name");
+if (s3 + s6 > qty || mix > qty || nm > qty){ out.innerHTML = '<p class="msg">オプションの枚数が注文枚数を超えています。</p>'; return; }
+rows.push([(full ? "片面フルカラー" : PRINTS[pr]) + "（" + qty + "枚 × " + yen(base) + "）", base * qty]);
+if (sur) rows.push([p.sur[0] + "（" + qty + "枚）", sur * qty]);
+if (disc) rows.push([(disc === 50 ? "早割" : "超早割") + "（" + qty + "枚 × -" + disc + "円）", -disc * qty]);
+if (s3) rows.push(["3L〜5L（" + s3 + "枚）", s3 * EXTRA.size3]);
+if (s6) rows.push(["6L〜7L（" + s6 + "枚）", s6 * EXTRA.size6]);
+if (mix) rows.push(["ミックスカラー（" + mix + "枚）", mix * EXTRA.mix]);
+if (nm) rows.push(["ネーム＋ゼッケン（" + nm + "枚）", nm * EXTRA.name]);
+const sz = s3 + s6 === qty ? (s6 === 0 ? EXTRA.size3 : s3 === 0 ? EXTRA.size6 : EXTRA.size3) : 0;
+const forced = (nm === qty ? EXTRA.name : 0) + (mix === qty ? EXTRA.mix : 0) + sz;
+const singles = [nm && nm < qty ? EXTRA.name : 0, mix && mix < qty ? EXTRA.mix : 0, s6 && s3 + s6 < qty ? EXTRA.size6 : 0, s3 && s3 + s6 < qty ? EXTRA.size3 : 0];
+freeV = base - disc + sur + forced + Math.max(...singles);
+} else {
+let rest = qty, cnt = [];
+const allN = !!(p.all && $("allname").checked);
+for (let i = 1; i < p.opts.length; i++){
+if (p.all && i >= 2){ $("o" + i).disabled = allN; if (allN) $("o" + i).value = 0; }
+cnt[i] = (allN && i >= 2) ? 0 : num("o" + i); rest -= cnt[i];
+}
+if (rest < 0){ out.innerHTML = '<p class="msg">内訳の枚数が注文枚数を超えています。</p>'; return; }
+cnt[0] = rest; $("o0").value = rest;
+const prc = t[2].slice(), lab = p.opts.slice();
+if (p.all && (allN || cnt[2] + cnt[3] > 0)){ prc[0] = t[2][2]; prc[1] = t[2][3]; lab[0] = "通常サイズ（ネーム or 番号あり単価）"; lab[1] = "3Lサイズ（ネーム or 番号あり単価）"; }
+p.opts.forEach((o,i) => { if (cnt[i]) rows.push([lab[i] + "（" + cnt[i] + "枚 × " + yen(prc[i]) + "）", cnt[i] * prc[i]]); });
+freeV = Math.max(0, ...prc.filter((x, i) => cnt[i] > 0));
+}
+if (qty >= 26 && freeV > 0) rows.push(["26枚以上のご注文：1枚分無料（最も高い1枚）", -freeV]);
+const total = rows.reduce((s, r) => s + r[1], 0);
+LAST = {pn: p.n, q: qty, r: rows, t: total, w: $("when") ? $("when").value : "0"};
+$("osum").innerHTML = "見積：" + esc(p.n) + "／" + qty + "枚／概算 " + yen(total) + "（税込）";
+const msg = "【クラTマガジン】見積の問い合わせ\n商品：" + p.n + "\n枚数：" + qty + "枚\n" +
+rows.map(r => "・" + r[0] + "：" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1]))).join("\n") +
+"\n概算合計（税込）：" + yen(total) + "\n※自動見積の概算です。";
+const orderBtn = '<button class="btn blue" onclick="openOrder()">この内容で注文する</button>';
+const lineBtn = '<a class="btn" target="_blank" rel="noopener" href="https://line.me/R/oaMessage/' + encodeURIComponent(LINE_ID) + '/?' + encodeURIComponent(msg) + '">この内容で問い合わせる（LINE）</a>' +
+'<p class="note">LINEが開き、見積内容が入力された状態になります。送信ボタンを押すと送られます。</p>';
+out.innerHTML = '<p class="total">' + yen(total) + '</p><p class="per">税込 ／ 1枚あたり平均 ' + yen(total / qty) + '</p>' + (qty >= 26 ? WARN : '') +
+'<table>' + rows.map(r => '<tr><td>' + r[0] + '</td><td>' + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + '</td></tr>').join("") + '</table><p class="note">通常インクの場合の金額になります。特殊インクをご使用の場合は別途料金がかかります。</p>' + orderBtn + lineBtn;
 }
 const SL = {SS:"XS(SS)", LL:"XL(LL)", "3L":"XXL(3L)"}, sl = z => SL[z] || z;
 const val = x => Array.isArray(x) ? x.join("、") : x === true ? "はい" : (x || "");
 const fmtD = s => s ? new Date(s + "T00:00:00").toLocaleDateString("ja-JP", {month:"long", day:"numeric", weekday:"short"}) : "";
-// 入力項目（注文用紙の順）：[id, 表示名, 種類, 選択肢, 必須]  種類 r=1つ選ぶ c=複数選ぶ chk=チェック
 const SEC = [
- ["ご希望日", [["want","お届け希望日","date"],["asap","出来上がり次第お届けしてOK","chk"],["use","ご使用日","date"],["evt","ご使用イベント","r",["学園祭","球技大会","部活・サークル","体育祭","その他"]],["evtx","「その他」の内容","text"]]],
- ["学校・団体", [["school","学校名","text",,1],["schoolk","学校名（フリガナ）","text"],["cls","クラス・団体名","text"],["clsk","クラス・団体名（フリガナ）","text"],["stel","学校TEL","tel"],["sfax","学校FAX","tel"]]],
- ["代表者", [["rep","代表者名","text",,1],["repk","代表者名（フリガナ）","text"],["rept","代表者は","r",["生徒","先生"]],["mob","携帯番号","tel",,1],["tutor","ご担任のお名前","text"]]],
- ["お届け先", [["ztype","お届け先の種類","r",["学校","自宅","友人宅"]],["zip","郵便番号","text"],["addr","住所","textarea"],["rname","お名前","text"],["rtel","電話番号","tel"]]],
- ["デザイン確認方法", [["conf","確認方法","c",["LINE","代表者メール","FAX"],1],["mail","メールアドレス（メールの場合）","email"],["altc","ご連絡先が上記と違う場合はご記入ください","textarea"]]],
- ["学割特典", [["disc","利用する特典","c",["みんな割","リピ割","#タグ付け割","アンケート割","メディアぷらす"]],["minna","みんな割：同時に申し込むクラス（学年・組）","text"],["rpt","リピ割：前回の注文番号","text"]]],
- ["サイズ・商品カラー", null, "colors"],
- ["プリント位置・サイズ", null, "pos"],
- ["その他", [["budget","ご希望制作予算（1枚あたり・円）","text"],["memo","その他ご要望","textarea"]]]
+["ご希望日", [["want","お届け希望日","date"],["asap","出来上がり次第お届けしてOK","chk"],["use","ご使用日","date"],["evt","ご使用イベント","r",["学園祭","球技大会","部活・サークル","体育祭","その他"]],["evtx","「その他」の内容","text"]]],
+["学校・団体", [["school","学校名","text",,1],["schoolk","学校名（フリガナ）","text"],["cls","クラス・団体名","text"],["clsk","クラス・団体名（フリガナ）","text"],["stel","学校TEL","tel"],["sfax","学校FAX","tel"]]],
+["代表者", [["rep","代表者名","text",,1],["repk","代表者名（フリガナ）","text"],["rept","代表者は","r",["生徒","先生"]],["mob","携帯番号","tel",,1],["tutor","ご担任のお名前","text"]]],
+["お届け先", [["ztype","お届け先の種類","r",["学校","自宅","友人宅"]],["zip","郵便番号","text"],["addr","住所","textarea"],["rname","お名前","text"],["rtel","電話番号","tel"]]],
+["学割特典", [["disc","利用する特典","c",["みんな割","リピ割","#タグ付け割","アンケート割","メディアぷらす"]],["minna","みんな割：同時に申し込むクラス（学年・組）","text"],["rpt","リピ割：前回の注文番号","text"]]],
+["サイズ・商品カラー", null, "colors"],
+["プリント位置・サイズ", null, "pos"],
+["その他", [["budget","ご希望制作予算（1枚あたり・円）","text"],["memo","その他ご要望","textarea"]]]
 ];
 const POS = [["front","前面","おまかせ：最大 縦38×横30cm くらい（ワンポイント：縦10×横10cm）"],["back","背面","おまかせ：最大 縦38×横30cm くらい（ワンポイント：縦10×横10cm）"],["sleeve","袖","おまかせ：最大 縦8×横8cm くらい"],["other","その他",""]];
 const LBL = {}, FLD = [];
 SEC.forEach(s => { if (s[1]) s[1].forEach(f => { LBL[f[0]] = f[1]; FLD.push(f); }); });
 POS.forEach(p => {
-  const base = [["size","サイズ","r",["おまかせ","指定"]],["h","縦（cm）くらい","text"],["w","横（cm）くらい","text"],["ink","インクカラー","text"],["font","フォント番号","text"],["samp","デザインサンプル番号","text"]];
-  (p[0] === "sleeve" ? [["side","位置","r",["右袖","左袖","両袖"]]] : []).concat(base).forEach(a => { const id = "p_" + p[0] + "_" + a[0]; LBL[id] = p[1] + "・" + a[1]; FLD.push([id, a[1], a[2], a[3]]); });
+const base = [["size","サイズ","r",["おまかせ","指定"]],["h","縦（cm）くらい","text"],["w","横（cm）くらい","text"],["ink","インクカラー","text"],["font","フォント番号","text"],["samp","デザインサンプル番号","text"]];
+(p[0] === "sleeve" ? [["side","位置","r",["右袖","左袖","両袖"]]] : []).concat(base).forEach(a => { const id = "p_" + p[0] + "_" + a[0]; LBL[id] = p[1] + "・" + a[1]; FLD.push([id, a[1], a[2], a[3]]); });
 });
 const fHtml = f => { const id = f[0], lb = f[1], ty = f[2], op = f[3], L = lb + (f[4] ? ' <span class="hint">必須</span>' : '');
-  if (ty === "r" || ty === "c") return '<label>' + L + '</label><div class="opts">' + op.map(o => '<label><input type="' + (ty === "r" ? "radio" : "checkbox") + '" name="' + id + '" value="' + esc(o) + '">' + esc(o) + '</label>').join("") + '</div>';
-  if (ty === "chk") return '<label class="opts"><input type="checkbox" id="' + id + '">' + lb + '</label>';
-  if (ty === "textarea") return '<label for="' + id + '">' + L + '</label><textarea id="' + id + '"></textarea>';
-  return '<label for="' + id + '">' + L + '</label><input id="' + id + '" type="' + ty + '">'; };
+if (ty === "r" || ty === "c") return '<label>' + L + '</label><div class="opts">' + op.map(o => '<label><input type="' + (ty === "r" ? "radio" : "checkbox") + '" name="' + id + '" value="' + esc(o) + '">' + esc(o) + '</label>').join("") + '</div>';
+if (ty === "chk") return '<label class="opts"><input type="checkbox" id="' + id + '">' + lb + '</label>';
+if (ty === "textarea") return '<label for="' + id + '">' + L + '</label><textarea id="' + id + '"></textarea>';
+return '<label for="' + id + '">' + L + '</label><input id="' + id + '" type="' + ty + '">'; };
 const getV = f => { const id = f[0], ty = f[2];
-  if (ty === "r"){ const e = document.querySelector('input[name="' + id + '"]:checked'); return e ? e.value : ""; }
-  if (ty === "c") return [].slice.call(document.querySelectorAll('input[name="' + id + '"]:checked')).map(e => e.value);
-  if (ty === "chk") return $(id).checked;
-  return $(id).value.trim(); };
+if (ty === "r"){ const e = document.querySelector('input[name="' + id + '"]:checked'); return e ? e.value : ""; }
+if (ty === "c") return [].slice.call(document.querySelectorAll('input[name="' + id + '"]:checked')).map(e => e.value);
+if (ty === "chk") return $(id).checked;
+return $(id).value.trim(); };
 $("ofields").innerHTML = SEC.map(s => '<h3 class="sec">' + s[0] + '</h3>' + (s[1] ? s[1].map(fHtml).join("") :
-  s[2] === "colors" ? '<p class="note">サービス枚数（26枚以上で1枚無料）を含めた、必要なサイズ枚数をすべて記入してください。</p><div id="colors"></div><button type="button" class="add" onclick="addColor()">＋ 色を追加（最大3色）</button><div class="hint" id="ssum" style="margin-top:6px"></div><label class="opts" style="margin-top:12px"><input type="checkbox" id="fix">商品カラー・サイズ・枚数について、以降変更はありません <span class="hint">必須</span></label>' :
-  POS.map(p => '<details><summary>' + p[1] + '</summary>' + FLD.filter(f => f[0].indexOf("p_" + p[0] + "_") === 0).map((f, i) => (f[0].slice(-5) === "_size" && p[2] ? '' : '') + fHtml(f) + (f[0].slice(-5) === "_size" && p[2] ? '<p class="note">' + p[2] + '</p>' : '')).join("") + '</details>').join(""))).join("");
+s[2] === "colors" ? '<p class="note">サービス枚数（26枚以上で1枚無料）を含めた、必要なサイズ枚数をすべて記入してください。</p><div id="colors"></div><button type="button" class="add" onclick="addColor()">＋ 色を追加（最大3色）</button><div class="hint" id="ssum" style="margin-top:6px"></div><label class="opts" style="margin-top:12px"><input type="checkbox" id="fix">商品カラー・サイズ・枚数について、以降変更はありません <span class="hint">必須</span></label>' :
+POS.map(p => '<details><summary>' + p[1] + '</summary>' + FLD.filter(f => f[0].indexOf("p_" + p[0] + "_") === 0).map((f, i) => (f[0].slice(-5) === "_size" && p[2] ? '' : '') + fHtml(f) + (f[0].slice(-5) === "_size" && p[2] ? '<p class="note">' + p[2] + '</p>' : '')).join("") + '</details>').join(""))).join("");
 function addColor(){
-  const c = document.querySelectorAll(".crow").length; if (c >= 3) return;
-  $("colors").insertAdjacentHTML("beforeend", '<div class="crow"><label>商品カラー' + (c + 1) + '</label><input class="cc" placeholder="例：ブラック"><div class="sizes" style="margin-top:8px">' + SIZES.map(z => '<div><div class="hint">' + sl(z) + '</div><input class="cs" data-z="' + z + '" type="number" inputmode="numeric" min="0"></div>').join("") + '</div></div>');
+const c = document.querySelectorAll(".crow").length; if (c >= 3) return;
+$("colors").insertAdjacentHTML("beforeend", '<div class="crow"><label>商品カラー' + (c + 1) + '</label><input class="cc" placeholder="例：ブラック"><div class="sizes" style="margin-top:8px">' + SIZES.map(z => '<div><div class="hint">' + sl(z) + '</div><input class="cs" data-z="' + z + '" type="number" inputmode="numeric" min="0"></div>').join("") + '</div></div>');
 }
 const rowsC = () => [].slice.call(document.querySelectorAll(".crow")).map(r => { const s = {}; r.querySelectorAll(".cs").forEach(i => { const n = parseInt(i.value, 10) || 0; if (n) s[i.dataset.z] = n; }); return {c: r.querySelector(".cc").value.trim(), s: s}; });
 const cnt = s => Object.keys(s).reduce((a, k) => a + s[k], 0);
@@ -229,48 +220,56 @@ function sumSizes(){ const sum = rowsC().reduce((a, r) => a + cnt(r.s), 0); $("s
 $("ofields").addEventListener("input", sumSizes);
 function openOrder(){ $("orderBox").hidden = false; if (!document.querySelector(".crow")) addColor(); sumSizes(); $("orderBox").scrollIntoView({behavior: "smooth"}); }
 function sendOrder(){
-  const err = $("oerr"); err.textContent = "";
-  if (!LAST){ err.textContent = "先に見積を出してください。"; return; }
-  const f = {}; FLD.forEach(x => { const v = getV(x); if (Array.isArray(v) ? v.length : v) f[x[0]] = v; });
-  const miss = FLD.filter(x => x[4] && !f[x[0]]).map(x => x[1]);
-  if (miss.length){ err.textContent = "未入力の必須項目：" + miss.join("、"); return; }
-  const c = rowsC().filter(r => cnt(r.s)), sum = sumSizes();
-  if (sum !== LAST.q){ err.textContent = "サイズ別の枚数の合計（" + sum + "枚）を、注文枚数（" + LAST.q + "枚）に合わせてください。"; return; }
-  if (c.some(r => !r.c)){ err.textContent = "枚数を入れた行の商品カラーを入力してください。"; return; }
-  if (!$("fix").checked){ err.textContent = "「商品カラー・サイズ・枚数について、以降変更はありません」にチェックしてください。"; return; }
-  const d = {pn: LAST.pn, q: LAST.q, t: LAST.t, r: LAST.r, w: LAST.w, c: c, f: f, d: new Date().toISOString().slice(0, 10)};
-  const base = SHEET_URL || location.href.split("#")[0], ok = !/studioiframesandbox/.test(base);
-  const cs = c.map(r => r.c + " " + Object.keys(r.s).map(z => sl(z) + ":" + r.s[z]).join(" ")).join(" / ");
-  let msg = "【クラTマガジン】ご注文\n学校名：" + f.school + "（" + (f.cls || "") + "）\n代表者：" + f.rep + "　携帯：" + f.mob + "\n商品：" + d.pn + "／" + d.q + "枚　概算：" + yen(d.t) +
-    "\nお届け希望：" + (f.asap ? "出来上がり次第OK" : (fmtD(f.want) || "未入力")) + "\nご使用日：" + (fmtD(f.use) || "未入力") + "\nカラー・サイズ：" + cs;
-  msg += ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(d) : "\n" + FLD.filter(x => f[x[0]] && x[0] !== "school").map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n");
-  window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(msg), "_blank");
+const err = $("oerr"); err.textContent = "";
+if (!LAST){ err.textContent = "先に見積を出してください。"; return; }
+const f = {}; FLD.forEach(x => { const v = getV(x); if (Array.isArray(v) ? v.length : v) f[x[0]] = v; });
+const miss = FLD.filter(x => x[4] && !f[x[0]]).map(x => x[1]);
+if (miss.length){ err.textContent = "未入力の必須項目：" + miss.join("、"); return; }
+const c = rowsC().filter(r => cnt(r.s)), sum = sumSizes();
+if (sum !== LAST.q){ err.textContent = "サイズ別の枚数の合計（" + sum + "枚）を、注文枚数（" + LAST.q + "枚）に合わせてください。"; return; }
+if (c.some(r => !r.c)){ err.textContent = "枚数を入れた行の商品カラーを入力してください。"; return; }
+if (!$("fix").checked){ err.textContent = "「商品カラー・サイズ・枚数について、以降変更はありません」にチェックしてください。"; return; }
+const d = {pn: LAST.pn, q: LAST.q, t: LAST.t, r: LAST.r, w: LAST.w, c: c, f: f, d: new Date().toISOString().slice(0, 10)};
+const base = SHEET_URL || location.href.split("#")[0], ok = !/studioiframesandbox/.test(base);
+const cs = c.map(r => r.c + " " + Object.keys(r.s).map(z => sl(z) + ":" + r.s[z]).join(" ")).join(" / ");
+let msg = "【クラTマガジン】ご注文\n学校名：" + f.school + "（" + (f.cls || "") + "）\n代表者：" + f.rep + "　携帯：" + f.mob + "\n商品：" + d.pn + "／" + d.q + "枚　概算：" + yen(d.t) +
+"\nお届け希望：" + (f.asap ? "出来上がり次第OK" : (fmtD(f.want) || "未入力")) + "\nご使用日：" + (fmtD(f.use) || "未入力") + "\nカラー・サイズ：" + cs;
+msg += ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(d) : "\n" + FLD.filter(x => f[x[0]] && x[0] !== "school").map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n");
+window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(msg), "_blank");
+}
+function saveJpg(){
+const run = () => window.html2canvas(document.querySelector(".sheet"), {scale: 2, backgroundColor: "#ffffff", ignoreElements: e => e.classList && e.classList.contains("noprint")}).then(c => {
+const a = document.createElement("a"); a.href = c.toDataURL("image/jpeg", 0.92); a.download = document.title + ".jpg"; document.body.appendChild(a); a.click(); a.remove(); });
+if (window.html2canvas) return run();
+const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; sc.onload = run;
+sc.onerror = () => alert("画像の保存に失敗しました。PDF保存か、画面のスクリーンショットをご利用ください。"); document.head.appendChild(sc);
 }
 function showSheet(){
-  if (location.hash.indexOf("#o=") !== 0) return false;
-  let d; try { d = dec(location.hash.slice(3)); } catch (e) { return false; }
-  const f = d.f, g = id => esc(val(f[id])).replace(/\n/g, "<br>"), gd = id => esc(fmtD(f[id]));
-  const tb = rows => "<table>" + rows.map(r => "<tr>" + r.map((c, i) => i % 2 ? "<td" + (r.length === 2 ? ' colspan="3"' : "") + ">" + c + "</td>" : "<th>" + c + "</th>").join("") + "</tr>").join("") + "</table>";
-  const wl = d.w === "80" ? "超早割" : d.w === "50" ? "早割" : "";
-  const disc = [wl].concat(f.disc || []).filter(Boolean).map(esc).join("、") + (f.minna ? "　みんな割：" + g("minna") : "") + (f.rpt ? "　リピ割（前回番号：" + g("rpt") + "）" : "");
-  const pv = (k, a) => esc(val(f["p_" + k + "_" + a]));
-  const psz = k => (k === "sleeve" ? pv(k, "side") + " " : "") + pv(k, "size") + (f["p_" + k + "_h"] || f["p_" + k + "_w"] ? "　縦" + pv(k, "h") + "×横" + pv(k, "w") + "cm" : "");
-  const prow = (name, fn) => "<tr><th>" + name + "</th>" + POS.map(p => "<td>" + fn(p[0]) + "</td>").join("") + "</tr>";
-  document.body.innerHTML = '<div class="sheet"><p class="noprint"><button class="btn blue" style="max-width:260px" onclick="window.print()">印刷 / PDF保存</button></p>' +
-    "<h2>2026 ORDERSHEET　クラTマガジン 注文用紙</h2><p>受付日：" + esc(d.d) + "　受付：WEB→LINE</p>" +
-    tb([["お届け希望日", gd("want") + (f.asap ? "　出来上がり次第OK" : ""), "ご使用日", gd("use") + " " + g("evt") + (f.evtx ? "（" + g("evtx") + "）" : "")]]) +
-    tb([["学割特典", disc || "なし"]]) +
-    tb([["学校名", g("school") + (f.schoolk ? "（" + g("schoolk") + "）" : ""), "クラス・団体名", g("cls") + (f.clsk ? "（" + g("clsk") + "）" : "")], ["学校TEL", g("stel"), "学校FAX", g("sfax")]]) +
-    tb([["代表者名", g("rep") + (f.repk ? "（" + g("repk") + "）" : "") + " " + g("rept"), "携帯番号", g("mob")], ["ご担任", g("tutor"), "デザイン確認", g("conf") + " " + g("mail")], ["確認の連絡先が違う場合", g("altc")]]) +
-    tb([["お届け先", g("ztype") + " 〒" + g("zip") + " " + g("addr")], ["お名前", g("rname"), "電話番号", g("rtel")]]) +
-    '<table class="sz"><tr><th>商品名</th><th>商品カラー</th>' + SIZES.map(z => "<th>" + sl(z) + "</th>").join("") + "<th>合計</th></tr>" +
-    d.c.map(r => "<tr><td>" + esc(d.pn) + "</td><td>" + esc(r.c) + "</td>" + SIZES.map(z => "<td class='r'>" + (r.s[z] || "") + "</td>").join("") + "<td class='r'>" + cnt(r.s) + "</td></tr>").join("") + "</table>" +
-    "<p>☑ 商品カラー・サイズ・枚数について、以降変更はありません</p>" +
-    '<table class="sz"><tr><th></th>' + POS.map(p => "<th>" + p[1] + "</th>").join("") + "</tr>" + prow("プリントサイズ", psz) + prow("インクカラー", k => pv(k, "ink")) + prow("フォント番号", k => pv(k, "font")) + prow("デザインサンプル番号", k => pv(k, "samp")) + "</table>" +
-    tb([["ご希望制作予算", g("budget") ? "1枚 " + g("budget") + " 円" : "", "ご要望", g("memo")]]) +
-    "<table>" + d.r.map(r => "<tr><td>" + esc(r[0]) + "</td><td class='r'>" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + "</td></tr>").join("") + "<tr><th>概算合計（税込）</th><td class='r'><b>" + yen(d.t) + "</b></td></tr></table>" +
-    "<p class='note'>通常インクの場合の概算です。デザイン画像はLINEトークで受領。オーダーメイド商品のため、デザイン確定後の変更・返品・交換、申込後のカラー／サイズ枚数の変更・キャンセルは原則できません。</p></div>";
-  return true;
+if (location.hash.indexOf("#o=") !== 0) return false;
+let d; try { d = dec(location.hash.slice(3)); } catch (e) { return false; }
+const f = d.f, g = id => esc(val(f[id])).replace(/\n/g, "<br>"), gd = id => esc(fmtD(f[id]));
+const tb = rows => "<table>" + rows.map(r => "<tr>" + r.map((c, i) => i % 2 ? "<td" + (r.length === 2 ? ' colspan="3"' : "") + ">" + c + "</td>" : "<th>" + c + "</th>").join("") + "</tr>").join("") + "</table>";
+const wl = d.w === "80" ? "超早割" : d.w === "50" ? "早割" : "";
+const disc = [wl].concat(f.disc || []).filter(Boolean).map(esc).join("、") + (f.minna ? "　みんな割：" + g("minna") : "") + (f.rpt ? "　リピ割（前回番号：" + g("rpt") + "）" : "");
+const pv = (k, a) => esc(val(f["p_" + k + "_" + a]));
+const psz = k => (k === "sleeve" ? pv(k, "side") + " " : "") + pv(k, "size") + (f["p_" + k + "_h"] || f["p_" + k + "_w"] ? "　縦" + pv(k, "h") + "×横" + pv(k, "w") + "cm" : "");
+const prow = (name, fn) => "<tr><th>" + name + "</th>" + POS.map(p => "<td>" + fn(p[0]) + "</td>").join("") + "</tr>";
+document.title = "注文書_" + (f.school || "") + (f.cls ? "_" + f.cls : "");
+document.body.innerHTML = '<div class="sheet"><p class="noprint"><button class="btn blue" style="max-width:260px" onclick="window.print()">印刷 / PDF保存</button> <button class="btn blue" style="max-width:260px" onclick="saveJpg()">画像（JPG）で保存</button></p>' +
+"<h2>2026 ORDERSHEET　クラTマガジン 注文用紙</h2><p>受付日：" + esc(d.d) + "　受付：WEB→LINE</p>" +
+tb([["お届け希望日", gd("want") + (f.asap ? "　出来上がり次第OK" : ""), "ご使用日", gd("use") + " " + g("evt") + (f.evtx ? "（" + g("evtx") + "）" : "")]]) +
+tb([["学割特典", disc || "なし"]]) +
+tb([["学校名", g("school") + (f.schoolk ? "（" + g("schoolk") + "）" : ""), "クラス・団体名", g("cls") + (f.clsk ? "（" + g("clsk") + "）" : "")], ["学校TEL", g("stel"), "学校FAX", g("sfax")]]) +
+tb([["代表者名", g("rep") + (f.repk ? "（" + g("repk") + "）" : "") + " " + g("rept"), "携帯番号", g("mob")], ["ご担任", g("tutor")]]) +
+tb([["お届け先", g("ztype") + " 〒" + g("zip") + " " + g("addr")], ["お名前", g("rname"), "電話番号", g("rtel")]]) +
+'<table class="sz"><tr><th>商品名</th><th>商品カラー</th>' + SIZES.map(z => "<th>" + sl(z) + "</th>").join("") + "<th>合計</th></tr>" +
+d.c.map(r => "<tr><td>" + esc(d.pn) + "</td><td>" + esc(r.c) + "</td>" + SIZES.map(z => "<td class='r'>" + (r.s[z] || "") + "</td>").join("") + "<td class='r'>" + cnt(r.s) + "</td></tr>").join("") + "</table>" +
+"<p>☑ 商品カラー・サイズ・枚数について、以降変更はありません</p>" +
+'<table class="sz"><tr><th></th>' + POS.map(p => "<th>" + p[1] + "</th>").join("") + "</tr>" + prow("プリントサイズ", psz) + prow("インクカラー", k => pv(k, "ink")) + prow("フォント番号", k => pv(k, "font")) + prow("デザインサンプル番号", k => pv(k, "samp")) + "</table>" +
+tb([["ご希望制作予算", g("budget") ? "1枚 " + g("budget") + " 円" : "", "ご要望", g("memo")]]) +
+"<table>" + d.r.map(r => "<tr><td>" + esc(r[0]) + "</td><td class='r'>" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + "</td></tr>").join("") + "<tr><th>概算合計（税込）</th><td class='r'><b>" + yen(d.t) + "</b></td></tr></table>" +
+"<p class='note'>通常インクの場合の概算です。デザイン画像はLINEトークで受領。オーダーメイド商品のため、デザイン確定後の変更・返品・交換、申込後のカラー／サイズ枚数の変更・キャンセルは原則できません。</p></div>";
+return true;
 }
 $("prod").addEventListener("input", buildForm);
 $("qty").addEventListener("input", calc);
