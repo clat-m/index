@@ -34,13 +34,6 @@ textarea{min-height:76px;resize:vertical}
 .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .sizes input{padding:8px 6px;text-align:center}
 .sizes .hint{text-align:center}
-.sheet{background:#fff;color:#000;max-width:780px;margin:0 auto;padding:24px;font-size:14px}
-.sheet h2{margin:0 0 8px;font-size:1.5rem}
-.sheet table{margin:8px 0 14px}
-.sheet td,.sheet th{border:1px solid #888;padding:6px 8px;text-align:left;vertical-align:top}
-.sheet th{background:#eee;width:28%}
-.sheet td.r{text-align:right;white-space:nowrap}
-@media print{.noprint{display:none}body{background:#fff}.sheet{padding:0}}
 .sec{font-size:1rem;margin:22px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
 .opts{display:flex;flex-wrap:wrap;gap:2px 14px}
 .opts label{font-weight:400;margin:2px 0;display:inline-flex;align-items:center}
@@ -50,8 +43,6 @@ details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:
 summary{font-weight:700;cursor:pointer}
 .add{background:none;border:1px dashed var(--acc);color:var(--acc);border-radius:10px;padding:8px 12px;margin-top:8px;font:inherit;cursor:pointer}
 .crow{margin-bottom:10px}
-.sheet .sz th{width:auto;font-size:11px;padding:4px}
-.sheet .sz td{font-size:12px;padding:4px}
 .note{color:var(--sub);font-size:.78rem;margin:8px 0 0}
 </style>
 </head>
@@ -83,13 +74,12 @@ summary{font-weight:700;cursor:pointer}
 <script>
 const DATA = [{"n":"ドライTシャツ","t":"std","plain":500,"tiers":[[20,29,[1300,1800,2300,2800],1400],[30,49,[1100,1450,1800,2150],1200],[50,99,[1050,1400,1750,2100],1100],[100,199,[950,1200,1450,1700],1000]]},{"n":"ベースボールシャツ","t":"std","plain":1200,"tiers":[[20,29,[2000,2500,3000,3500],1400],[30,49,[1800,2150,2500,2850],1200],[50,99,[1750,2100,2450,2800],1100],[100,199,[1650,1900,2150,2400],1000]],"sur":["ストライプ・迷彩生地",300]},{"n":"バスケビブス","t":"std","plain":1100,"tiers":[[20,29,[1900,2400,2900,3400],1400],[30,49,[1700,2050,2400,2750],1200],[50,99,[1650,2000,2350,2700],1100],[100,199,[1550,1800,2050,2300],1000]]},{"n":"フットボールシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"ライトドライTシャツ","t":"std","plain":450,"tiers":[[20,29,[1250,1750,2250,2750],1400],[30,49,[1050,1400,1750,2100],1200],[50,99,[1000,1350,1700,2050],1100],[100,199,[900,1150,1400,1650],1000]]},{"n":"ドライシルキーTシャツ","t":"std","plain":700,"tiers":[[20,29,[1500,2000,2500,3000],1400],[30,49,[1300,1650,2000,2350],1200],[50,99,[1250,1600,1950,2300],1100],[100,199,[1150,1400,1650,1900],1000]]},{"n":"ヘビーウェイトTシャツ","t":"std","plain":650,"tiers":[[20,29,[1450,1950,2450,2950],1400],[30,49,[1250,1600,1950,2300],1200],[50,99,[1200,1550,1900,2250],1100],[100,199,[1100,1350,1600,1850],1000]]},{"n":"スタンダードTシャツ","t":"std","plain":500,"tiers":[[20,29,[1300,1800,2300,2800],1400],[30,49,[1100,1450,1800,2150],1200],[50,99,[1050,1400,1750,2100],1100],[100,199,[950,1200,1450,1700],1000]]},{"n":"ドライポロシャツ","t":"std","plain":850,"tiers":[[20,29,[1650,2150,2650,3150],1400],[30,49,[1450,1800,2150,2500],1200],[50,99,[1400,1750,2100,2450],1100],[100,199,[1300,1550,1800,2050],1000]]},{"n":"ドライレイヤードポロ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"ドライカノコポロシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"アクティブドライポロ","t":"std","plain":1500,"tiers":[[20,29,[2300,2800,3300,3800],1400],[30,49,[2100,2450,2800,3150],1200],[50,99,[2050,2400,2750,3100],1100],[100,199,[1950,2200,2450,2700],1000]]},{"n":"ラグランTシャツ","t":"std","plain":800,"tiers":[[20,29,[1600,2100,2600,3100],1400],[30,49,[1400,1750,2100,2450],1200],[50,99,[1350,1700,2050,2400],1100],[100,199,[1250,1500,1750,2000],1000]]},{"n":"グラデーションTシャツ","t":"std","plain":200,"tiers":[[20,29,[1000,1500,2000,2500],1400],[30,49,[800,1150,1500,1850],1200],[50,99,[750,1100,1450,1800],1100],[100,199,[650,900,1150,1400],1000]]},{"n":"ドライロングスリーブTシャツ","t":"std","plain":700,"tiers":[[20,29,[1500,2000,2500,3000],1400],[30,49,[1300,1650,2000,2350],1200],[50,99,[1250,1600,1950,2300],1100],[100,199,[1150,1400,1650,1900],1000]]},{"n":"ロングスリーブTシャツ","t":"std","plain":1000,"tiers":[[20,29,[1800,2300,2800,3300],1400],[30,49,[1600,1950,2300,2650],1200],[50,99,[1550,1900,2250,2600],1100],[100,199,[1450,1700,1950,2200],1000]]},{"n":"パーカ","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ジップパーカ","t":"std","plain":2400,"tiers":[[20,29,[3200,3700,4200,4700],1400],[30,49,[3000,3350,3700,4050],1200],[50,99,[2950,3300,3650,4000],1100],[100,199,[2850,3100,3350,3600],1000]]},{"n":"裏起毛パーカ","t":"std","plain":2400,"tiers":[[20,29,[3200,3700,4200,4700],1400],[30,49,[3000,3350,3700,4050],1200],[50,99,[2950,3300,3650,4000],1100],[100,199,[2850,3100,3350,3600],1000]]},{"n":"裏起毛ジップパーカ","t":"std","plain":2800,"tiers":[[20,29,[3600,4100,4600,5100],1400],[30,49,[3400,3750,4100,4450],1200],[50,99,[3350,3700,4050,4400],1100],[100,199,[3250,3500,3750,4000],1000]]},{"n":"トレーナ","t":"std","plain":1600,"tiers":[[20,29,[2400,2900,3400,3900],1400],[30,49,[2200,2550,2900,3250],1200],[50,99,[2150,2500,2850,3200],1100],[100,199,[2050,2300,2550,2800],1000]]},{"n":"スウェットパンツ","t":"std","plain":1700,"tiers":[[20,29,[2500,3000,3500,4000],1400],[30,49,[2300,2650,3000,3350],1200],[50,99,[2250,2600,2950,3300],1100],[100,199,[2150,2400,2650,2900],1000]]},{"n":"スタッフジャケット","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ジャージ","t":"std","plain":3600,"tiers":[[20,29,[4400,4900,5400,5900],1400],[30,49,[4200,4550,4900,5250],1200],[50,99,[4150,4500,4850,5200],1100],[100,199,[4050,4300,4550,4800],1000]]},{"n":"ジャージパンツ","t":"std","plain":2900,"tiers":[[20,29,[3700,4200,4700,5200],1400],[30,49,[3500,3850,4200,4550],1200],[50,99,[3450,3800,4150,4500],1100],[100,199,[3350,3600,3850,4100],1000]]},{"n":"コットントート","t":"std","plain":200,"tiers":[[20,29,[1000,1500,2000,2500],1400],[30,49,[800,1150,1500,1850],1200],[50,99,[750,1100,1450,1800],1100],[100,199,[650,900,1150,1400],1000]]},{"n":"ナップサック","t":"std","plain":400,"tiers":[[20,29,[1200,1700,2200,2700],1400],[30,49,[1000,1350,1700,2050],1200],[50,99,[950,1300,1650,2000],1100],[100,199,[850,1100,1350,1600],1000]]},{"n":"ハッピ","t":"std","plain":2000,"tiers":[[20,29,[2800,3300,3800,4300],1400],[30,49,[2600,2950,3300,3650],1200],[50,99,[2550,2900,3250,3600],1100],[100,199,[2450,2700,2950,3200],1000]]},{"n":"ふるプリTシャツ","all":true,"t":"opt","opts":["通常","3Lサイズ","ネーム or 番号あり","3L＋ネーム or 番号あり"],"tiers":[[20,49,[2700,3200,3000,3500]],[50,99,[2500,3000,2800,3300]],[100,199,[2400,2900,2700,3200]]],"note":"サイズ・ネームも込みの料金です。"},{"n":"ふるプリビブス","all":true,"t":"opt","opts":["通常","3Lサイズ","ネーム or 番号あり","3L＋ネーム or 番号あり"],"tiers":[[20,49,[2900,3400,3200,3700]],[50,99,[2700,3200,3000,3500]],[100,199,[2600,3100,2900,3400]]],"note":"サイズ・ネームも込みの料金です。"},{"n":"ゲームシャツ","t":"opt","opts":["片面プリント","背ネーム・背番号","片面プリント＋ネーム・背番号"],"tiers":[[20,99,[1600,1800,2200]]],"note":"20〜99枚の料金です。100枚以上はお問い合わせください。"},{"n":"スポーツシャツ","t":"opt","opts":["背ネームor背番号","背ネーム・背番号"],"tiers":[[1,99,[2500,3000]]],"note":"1〜99枚の料金です。100枚以上はお問い合わせください。"}];
 const WARN = '<p class="warn">【ご注意】26枚以上のご注文は、1枚分が無料になります。ご入力の枚数は、無料分を含めた「お手元に届けたい枚数」です。（例：26枚と入力 → お支払いは25枚分）</p>';
-const SHEET_URL = "https://clat-m.github.io/index/";
+const SHEET_URL = "https://clat-m.github.io/index/sheet.html";
 const LINE_ID = "@clat-m";
 let LAST = null;
 const SIZES = ["150","SS","S","M","L","LL","3L","4L","5L","6L","7L"];
 const esc = t => String(t == null ? "" : t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const enc = o => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
-const dec = t => JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,"+").replace(/_/g,"/")))));
 const EXTRA = {size3:100, size6:200, mix:100, name:1300, full0:null};
 const PRINTS = ["片面1色","片面2色 / 両面1色ずつ","片面3色 / 片面1色＋反対面2色","片面3色＋反対面1色 / 両面2色ずつ","片面フルカラー"];
 const $ = id => document.getElementById(id);
@@ -232,48 +222,16 @@ if (!$("fix").checked){ err.textContent = "「商品カラー・サイズ・枚�
 const d = {pn: LAST.pn, q: LAST.q, t: LAST.t, r: LAST.r, w: LAST.w, c: c, f: f, d: new Date().toISOString().slice(0, 10)};
 const base = SHEET_URL || location.href.split("#")[0], ok = !/studioiframesandbox/.test(base);
 const cs = c.map(r => r.c + " " + Object.keys(r.s).map(z => sl(z) + ":" + r.s[z]).join(" ")).join(" / ");
+const z = {p: d.pn, q: d.q, t: d.t, w: d.w, d: d.d, c: c.map(r => [r.c, r.s]), f: {}};
+FLD.forEach((x, i) => { if (f[x[0]]) z.f[i] = f[x[0]]; });
 let msg = "【クラTマガジン】ご注文\n学校名：" + f.school + "（" + (f.cls || "") + "）\n代表者：" + f.rep + "　携帯：" + f.mob + "\n商品：" + d.pn + "／" + d.q + "枚　概算：" + yen(d.t) +
 "\nお届け希望：" + (f.asap ? "出来上がり次第OK" : (fmtD(f.want) || "未入力")) + "\nご使用日：" + (fmtD(f.use) || "未入力") + "\nカラー・サイズ：" + cs;
-msg += ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(d) : "\n" + FLD.filter(x => f[x[0]] && x[0] !== "school").map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n");
+msg += ok ? "\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(z) : "\n" + FLD.filter(x => f[x[0]] && x[0] !== "school").map(x => LBL[x[0]] + "：" + val(f[x[0]])).join("\n");
 window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(msg), "_blank");
-}
-function saveJpg(){
-const run = () => window.html2canvas(document.querySelector(".sheet"), {scale: 2, backgroundColor: "#ffffff", ignoreElements: e => e.classList && e.classList.contains("noprint")}).then(c => {
-const a = document.createElement("a"); a.href = c.toDataURL("image/jpeg", 0.92); a.download = document.title + ".jpg"; document.body.appendChild(a); a.click(); a.remove(); });
-if (window.html2canvas) return run();
-const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; sc.onload = run;
-sc.onerror = () => alert("画像の保存に失敗しました。PDF保存か、画面のスクリーンショットをご利用ください。"); document.head.appendChild(sc);
-}
-function showSheet(){
-if (location.hash.indexOf("#o=") !== 0) return false;
-let d; try { d = dec(location.hash.slice(3)); } catch (e) { return false; }
-const f = d.f, g = id => esc(val(f[id])).replace(/\n/g, "<br>"), gd = id => esc(fmtD(f[id]));
-const tb = rows => "<table>" + rows.map(r => "<tr>" + r.map((c, i) => i % 2 ? "<td" + (r.length === 2 ? ' colspan="3"' : "") + ">" + c + "</td>" : "<th>" + c + "</th>").join("") + "</tr>").join("") + "</table>";
-const wl = d.w === "80" ? "超早割" : d.w === "50" ? "早割" : "";
-const disc = [wl].concat(f.disc || []).filter(Boolean).map(esc).join("、") + (f.minna ? "　みんな割：" + g("minna") : "") + (f.rpt ? "　リピ割（前回番号：" + g("rpt") + "）" : "");
-const pv = (k, a) => esc(val(f["p_" + k + "_" + a]));
-const psz = k => (k === "sleeve" ? pv(k, "side") + " " : "") + pv(k, "size") + (f["p_" + k + "_h"] || f["p_" + k + "_w"] ? "　縦" + pv(k, "h") + "×横" + pv(k, "w") + "cm" : "");
-const prow = (name, fn) => "<tr><th>" + name + "</th>" + POS.map(p => "<td>" + fn(p[0]) + "</td>").join("") + "</tr>";
-document.title = "注文書_" + (f.school || "") + (f.cls ? "_" + f.cls : "");
-document.body.innerHTML = '<div class="sheet"><p class="noprint"><button class="btn blue" style="max-width:260px" onclick="window.print()">印刷 / PDF保存</button> <button class="btn blue" style="max-width:260px" onclick="saveJpg()">画像（JPG）で保存</button></p>' +
-"<h2>2026 ORDERSHEET　クラTマガジン 注文用紙</h2><p>受付日：" + esc(d.d) + "　受付：WEB→LINE</p>" +
-tb([["お届け希望日", gd("want") + (f.asap ? "　出来上がり次第OK" : ""), "ご使用日", gd("use") + " " + g("evt") + (f.evtx ? "（" + g("evtx") + "）" : "")]]) +
-tb([["学割特典", disc || "なし"]]) +
-tb([["学校名", g("school") + (f.schoolk ? "（" + g("schoolk") + "）" : ""), "クラス・団体名", g("cls") + (f.clsk ? "（" + g("clsk") + "）" : "")], ["学校TEL", g("stel"), "学校FAX", g("sfax")]]) +
-tb([["代表者名", g("rep") + (f.repk ? "（" + g("repk") + "）" : "") + " " + g("rept"), "携帯番号", g("mob")], ["ご担任", g("tutor")]]) +
-tb([["お届け先", g("ztype") + " 〒" + g("zip") + " " + g("addr")], ["お名前", g("rname"), "電話番号", g("rtel")]]) +
-'<table class="sz"><tr><th>商品名</th><th>商品カラー</th>' + SIZES.map(z => "<th>" + sl(z) + "</th>").join("") + "<th>合計</th></tr>" +
-d.c.map(r => "<tr><td>" + esc(d.pn) + "</td><td>" + esc(r.c) + "</td>" + SIZES.map(z => "<td class='r'>" + (r.s[z] || "") + "</td>").join("") + "<td class='r'>" + cnt(r.s) + "</td></tr>").join("") + "</table>" +
-"<p>☑ 商品カラー・サイズ・枚数について、以降変更はありません</p>" +
-'<table class="sz"><tr><th></th>' + POS.map(p => "<th>" + p[1] + "</th>").join("") + "</tr>" + prow("プリントサイズ", psz) + prow("インクカラー", k => pv(k, "ink")) + prow("フォント番号", k => pv(k, "font")) + prow("デザインサンプル番号", k => pv(k, "samp")) + "</table>" +
-tb([["ご希望制作予算", g("budget") ? "1枚 " + g("budget") + " 円" : "", "ご要望", g("memo")]]) +
-"<table>" + d.r.map(r => "<tr><td>" + esc(r[0]) + "</td><td class='r'>" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + "</td></tr>").join("") + "<tr><th>概算合計（税込）</th><td class='r'><b>" + yen(d.t) + "</b></td></tr></table>" +
-"<p class='note'>通常インクの場合の概算です。デザイン画像はLINEトークで受領。オーダーメイド商品のため、デザイン確定後の変更・返品・交換、申込後のカラー／サイズ枚数の変更・キャンセルは原則できません。</p></div>";
-return true;
 }
 $("prod").addEventListener("input", buildForm);
 $("qty").addEventListener("input", calc);
-if (!showSheet()) buildForm();
+buildForm();
 </script>
 </body>
 </html>
