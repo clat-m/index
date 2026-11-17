@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クラTマガジン デザイン送付</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;--ok:#0a7a3c;--okbg:#e7f6ec;--ngbg:#fdecea;--ckA:#fff;--ckB:#d9dde6;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;--ok:#6fdc9a;--okbg:#14301f;--ngbg:#3a1c1a;--ckA:#2b3350;--ckB:#3a4466;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}
+main{max-width:560px;width:auto;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.35rem;margin:0 0 4px}
+h2{font-size:1.02rem;margin:0 0 8px}
+.lead{color:var(--sub);font-size:.9rem;margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 6px}
+label:first-child{margin-top:0}
+.hint{font-weight:400;color:var(--sub);font-size:.8rem}
+.req{font-size:.7rem;background:var(--warn);color:#fff;border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:700}
+input[type=text],input[type=number],input[type=file]{width:100%;min-width:0;max-width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.note{color:var(--sub);font-size:.8rem;margin:8px 0 0}
+.msg{color:var(--warn);font-weight:700;font-size:.9rem;margin:8px 0 0}
+.pv{background:repeating-conic-gradient(var(--ckB) 0% 25%,var(--ckA) 0% 50%) 0 0/16px 16px;border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center;margin:0 0 12px}
+.pv img,.pv canvas{max-width:100%;max-height:260px;width:auto;height:auto;display:inline-block;vertical-align:middle}
+.res{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.9rem;background:var(--accsoft)}
+.res b{display:block}
+.res.ok{background:var(--okbg)}.res.ng{background:var(--ngbg)}
+.res i{font-style:normal;font-size:1.2rem;line-height:1.3}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:end}
+.btn{display:block;width:100%;text-align:center;background:#1f4fd8;color:#fff;font:inherit;font-weight:700;padding:14px;border:0;border-radius:12px;text-decoration:none;margin-top:14px;cursor:pointer}
+.btn.line{background:#06c755}
+.btn.sub{background:var(--accsoft);color:var(--acc)}
+.btn[disabled]{opacity:.5;cursor:default}
+.radio{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:8px 0}
+.radio input{margin-top:5px}
+input[type=range]{width:100%}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:12px}
+.bar div{height:100%;width:0;background:var(--acc);transition:width .2s}
+textarea{width:100%;font:inherit;font-size:14px;min-height:120px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+<h1>デザインの送付</h1>
+<p class="lead">LINEに画像を直接送ると、画質が下がったり、透明な背景に色がついたりすることがあります。こちらから送ると、元の画質のままスタッフに届きます。</p>
+
+<div class="card">
+<label for="lab">学校名・お名前 <span class="req">必須</span><span class="hint">　注文内容と照らし合わせるために使います</span></label>
+<input type="text" id="lab" maxlength="30" placeholder="例：○○中学校 3年2組 山田" autocomplete="off">
+<label for="file">デザインのファイル <span class="hint">PNG・JPG・PDF・ai・psd／20MBまで</span></label>
+<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,image/png,image/jpeg,application/pdf">
+<p class="msg" id="ferr" role="alert"></p>
+</div>
+
+<div class="card" id="chk" hidden>
+<h2>画質チェック</h2>
+<div class="pv" id="pv"></div>
+<div id="info"></div>
+<div class="row" id="widthRow">
+<div><label for="pw" style="margin-top:0">プリントの横幅（cm）<span class="hint"> 最大30cm</span></label><input type="number" id="pw" value="30" min="3" max="30" step="1" inputmode="numeric"></div>
+<p class="note" style="margin:0">この大きさで印刷したときの細かさ（dpi）を計算します。</p>
+</div>
+</div>
+
+<div class="card" id="bgc" hidden>
+<h2>背景を消す（任意）</h2>
+<p class="note" style="margin:0 0 8px">背景が白や単色の画像から、背景を透明にします。四隅の色と近い色を、外側から消していきます。文字の中の白などは消えません。</p>
+<label for="tol" style="margin-top:8px">消す色の範囲 <span class="hint" id="tolv"></span></label>
+<input type="range" id="tol" min="2" max="40" value="12">
+<button type="button" class="btn sub" id="rmBtn">背景を消す</button>
+<p class="msg" id="rmErr" role="alert"></p>
+<div class="pv" id="pv2" hidden style="margin-top:12px"></div>
+<div id="pick" hidden>
+<label style="margin-top:4px">どちらを送りますか？</label>
+<label class="radio"><input type="radio" name="use" value="orig" checked><span>元のファイルをそのまま送る</span></label>
+<label class="radio"><input type="radio" name="use" value="proc"><span>背景を消した画像（PNG）を送る</span></label>
+</div>
+<p class="note">きれいに消えない場合は「消す色の範囲」を変えて、もう一度押してください。うまくいかなければ、元のファイルをお送りいただければスタッフが対応します。</p>
+</div>
+
+<div class="card" id="snd" hidden>
+<h2>送信</h2>
+<p class="note" style="margin:0 0 4px">送信すると、ファイルは制作確認のために一時的に預かります。<b><span id="keep">14</span>日後に自動で削除</b>されます。制作の確認以外には使用しません。</p>
+<button type="button" class="btn" id="upBtn">デザインを送信する</button>
+<div class="bar" id="bar" hidden><div id="barIn"></div></div>
+<p class="msg" id="uerr" role="alert"></p>
+</div>
+
+<div class="card" id="done" hidden>
+<h2>送信できました</h2>
+<p class="note" style="margin:0 0 4px">下のボタンでLINEを開き、送信ボタンを押すと、デザインのURLがスタッフに届きます。<b>LINEで送るまでが完了です。</b></p>
+<a class="btn line" id="lineBtn" target="_blank" rel="noopener">LINEでデザインのURLを送る</a>
+<button type="button" class="btn sub" id="cpBtn">LINEが開かない場合：文章をコピーする</button>
+<p class="note" id="cpMsg"></p>
+<textarea id="cbox" readonly hidden></textarea>
+<p class="note">ご注文の内容は、見積りページから別にお送りください。</p>
+<button type="button" class="btn sub" id="again">別のファイルを送る</button>
+</div>
+</main>
+
+<script>
+const ENDPOINT="https://script.google.com/macros/s/AKfycbz8qgWLyqQjLrdNPFskwNr1kfQuYG6heYsj8TwsQHGldLavypd-Mabf18muAh9THCsHFA/exec";            // ← Apps Scriptの「ウェブアプリのURL」をここに貼ります
+const KEY="clat-design-2026"; // ← Code.gs の KEY と同じ文字にします
+const LINE_ID="@clat-m", MAX=20*1024*1024, KEEP=14, MAXPX=16e6;
+const OKEXT=["png","jpg","jpeg","pdf","ai","psd"];
+const $=id=>document.getElementById(id);
+let F=null,IMG=null,PROC=null,busy=false;
+const ext=n=>(n.split(".").pop()||"").toLowerCase();
+const mb=b=>(b/1048576).toFixed(b<1048576*10?1:0)+"MB";
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+$("keep").textContent=KEEP;
+
+function res(cls,ico,t,d){return '<div class="res '+cls+'"><i>'+ico+'</i><div><b>'+t+'</b>'+(d||"")+'</div></div>';}
+
+function reset(){
+  F=null;IMG=null;PROC=null;
+  ["chk","bgc","snd","done"].forEach(i=>$(i).hidden=true);
+  $("pv").innerHTML="";$("pv2").innerHTML="";$("pv2").hidden=true;$("pick").hidden=true;
+  $("info").innerHTML="";$("ferr").textContent="";$("uerr").textContent="";$("rmErr").textContent="";
+  document.querySelector('input[name=use][value=orig]').checked=true;
+}
+
+$("file").addEventListener("change",async e=>{
+  reset();
+  const f=e.target.files[0];if(!f)return;
+  const x=ext(f.name);
+  if(OKEXT.indexOf(x)<0){$("ferr").textContent="この形式は受け付けていません（PNG・JPG・PDF・ai・psdのみ）。";e.target.value="";return;}
+  if(f.size>MAX){$("ferr").textContent="ファイルが大きすぎます（"+mb(f.size)+"）。20MBまでです。";e.target.value="";return;}
+  F=f;
+  $("chk").hidden=false;$("snd").hidden=false;
+  if(x==="png"||x==="jpg"||x==="jpeg")await checkImage(f,x);
+  else{
+    $("widthRow").hidden=true;
+    $("pv").innerHTML='<div style="padding:22px 8px;font-weight:700">'+esc(f.name)+'</div>';
+    $("info").innerHTML=res("","📄",x.toUpperCase()+"ファイルを受け付けました","この形式は、こちらでは画質チェックができません。スタッフが確認します。");
+  }
+});
+
+function loadImg(f){return new Promise((ok,ng)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>ok({el:i,url:u});i.onerror=()=>{URL.revokeObjectURL(u);ng();};i.src=u;});}
+
+async function checkImage(f,x){
+  let L;
+  try{L=await loadImg(f);}catch(e){$("ferr").textContent="画像を読み込めませんでした。ファイルが壊れていないかご確認ください。";$("chk").hidden=true;$("snd").hidden=true;return;}
+  const w=L.el.naturalWidth,h=L.el.naturalHeight;
+  IMG={el:L.el,w,h,x};
+  $("widthRow").hidden=false;
+  $("pv").innerHTML='<img alt="選んだ画像" src="'+L.url+'">';
+  // 透明・背景の判定（縮小して調べる）
+  const k=Math.min(1,1200/Math.max(w,h)),cw=Math.max(1,Math.round(w*k)),ch=Math.max(1,Math.round(h*k));
+  const c=document.createElement("canvas");c.width=cw;c.height=ch;
+  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(L.el,0,0,cw,ch);
+  const d=g.getImageData(0,0,cw,ch).data;
+  let tr=0;for(let i=3;i<d.length;i+=4)if(d[i]<250)tr++;
+  const alpha=tr/(cw*ch)>0.002;
+  const px=(X,Y)=>{const i=(Y*cw+X)*4;return[d[i],d[i+1],d[i+2]];};
+  const cs=[px(0,0),px(cw-1,0),px(0,ch-1),px(cw-1,ch-1)];
+  const near=cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<40);
+  IMG.alpha=alpha;IMG.bgSame=near&&!alpha;
+  const sw='<span style="display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;background:rgb('+cs[0].join(",")+')"></span>';
+  let t;
+  if(alpha)t=res("ok","✅","背景が透明です","このまま送れば、透明のままスタッフに届きます。");
+  else if(x!=="png")t=res("","ℹ️","JPG形式です","JPGは背景を透明にできない形式です。"+(IMG.bgSame?"背景に単色"+sw+"がついています。透明にしたい場合は、下の「背景を消す」をお使いください。":""));
+  else if(IMG.bgSame)t=res("","ℹ️","背景に色がついています "+sw,"透明にしたい場合は、下の「背景を消す」をお使いください。");
+  else t=res("","ℹ️","背景は透明ではありません","写真など、背景がある画像です。");
+  IMG.tHtml=t;
+  $("bgc").hidden=alpha||w*h>MAXPX;
+  if(!alpha&&w*h>MAXPX)IMG.tHtml+=res("","ℹ️","背景を消す機能は使えません","画像が大きいため、この機能は使えません。元のファイルをお送りください。");
+  showQuality();
+}
+
+function showQuality(){
+  if(!IMG)return;
+  const cm=Math.min(30,Math.max(3,parseFloat($("pw").value)||30));
+  const dpi=Math.round(IMG.w/(cm/2.54));
+  let q;
+  const sz="画像の大きさ：横"+IMG.w+"px × 縦"+IMG.h+"px<br>"+cm+"cm幅で印刷すると、約"+dpi+"dpi";
+  if(dpi>=150)q=res("ok","✅","きれいに印刷できます",sz);
+  else if(dpi>=100)q=res("","⚠️","少し粗くなる可能性があります",sz+"<br>可能であれば、もっと大きな画像をご用意ください。");
+  else q=res("ng","❗","印刷すると粗くなる可能性が高いです",sz+"<br>スクリーンショットやLINEで受け取った画像ではありませんか？元のデータがあればそちらをお送りください。そのまま送ることもできます。");
+  $("info").innerHTML=q+IMG.tHtml;
+}
+$("pw").addEventListener("input",showQuality);
+
+// 背景を消す
+$("tol").addEventListener("input",()=>{$("tolv").textContent=$("tol").value<=8?"（せまい）":$("tol").value>=25?"（ひろい）":"（ふつう）";});
+$("tol").dispatchEvent(new Event("input"));
+$("rmBtn").addEventListener("click",()=>{
+  $("rmErr").textContent="";
+  if(!IMG)return;
+  $("rmBtn").disabled=true;$("rmBtn").textContent="処理中…";
+  setTimeout(()=>{try{removeBg();}catch(e){$("rmErr").textContent="処理に失敗しました。元のファイルをお送りください。";}$("rmBtn").disabled=false;$("rmBtn").textContent="背景を消す";},30);
+});
+function removeBg(){
+  const w=IMG.w,h=IMG.h;
+  const c=document.createElement("canvas");c.width=w;c.height=h;
+  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(IMG.el,0,0);
+  const id=g.getImageData(0,0,w,h),d=id.data;
+  const at=p=>[d[p*4],d[p*4+1],d[p*4+2]];
+  const cs=[at(0),at(w-1),at((h-1)*w),at(h*w-1)];
+  if(!cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<60)){$("rmErr").textContent="四隅の色がそろっていないため、自動では消せません。元のファイルをお送りください。";return;}
+  const r=Math.round(cs.reduce((s,a)=>s+a[0],0)/4),gg=Math.round(cs.reduce((s,a)=>s+a[1],0)/4),b=Math.round(cs.reduce((s,a)=>s+a[2],0)/4);
+  const thr=$("tol").value/100*441.67,t2=thr*thr;
+  const dd=p=>{const i=p*4,A=d[i]-r,B=d[i+1]-gg,C=d[i+2]-b;return A*A+B*B+C*C;};
+  const rm=new Uint8Array(w*h),q=new Int32Array(w*h);let qh=0,qt=0;
+  const push=p=>{if(!rm[p]&&dd(p)<=t2){rm[p]=1;q[qt++]=p;}};
+  for(let x=0;x<w;x++){push(x);push((h-1)*w+x);}
+  for(let y=0;y<h;y++){push(y*w);push(y*w+w-1);}
+  while(qh<qt){const p=q[qh++],px=p%w;if(px>0)push(p-1);if(px<w-1)push(p+1);if(p>=w)push(p-w);if(p<w*(h-1))push(p+w);}
+  const ratio=qt/(w*h);
+  if(ratio<0.005){$("rmErr").textContent="消せる背景が見つかりませんでした。「消す色の範囲」をひろげてお試しください。";return;}
+  if(ratio>0.97){$("rmErr").textContent="ほとんどが消えてしまいました。「消す色の範囲」をせまくしてお試しください。";return;}
+  for(let p=0;p<w*h;p++){
+    if(rm[p]){d[p*4+3]=0;continue;}
+    const px=p%w;
+    if((px>0&&rm[p-1])||(px<w-1&&rm[p+1])||(p>=w&&rm[p-w])||(p<w*(h-1)&&rm[p+w])){ // ふちをなめらかに
+      const v=Math.sqrt(dd(p));
+      if(v<thr*2)d[p*4+3]=Math.round(255*Math.min(1,Math.max(0,(v-thr)/thr)));
+    }
+  }
+  g.putImageData(id,0,0);
+  PROC=c;
+  $("pv2").innerHTML="";$("pv2").appendChild(c);$("pv2").hidden=false;$("pick").hidden=false;
+  document.querySelector('input[name=use][value=proc]').checked=true;
+}
+
+// 送信
+function useProc(){return PROC&&document.querySelector('input[name=use]:checked').value==="proc";}
+function toB64(blob){return new Promise((ok,ng)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]||"");r.onerror=ng;r.readAsDataURL(blob);});}
+$("upBtn").addEventListener("click",async()=>{
+  if(busy)return;
+  const err=$("uerr");err.textContent="";
+  const label=$("lab").value.trim();
+  if(!label){err.textContent="「学校名・お名前」を入力してください。";$("lab").focus();return;}
+  if(!F){err.textContent="ファイルを選んでください。";return;}
+  if(!ENDPOINT){err.textContent="送信の準備中です。しばらくしてからお試しください。";return;}
+  busy=true;$("upBtn").disabled=true;
+  try{
+    let blob=F,name=F.name;
+    if(useProc()){
+      blob=await new Promise(r=>PROC.toBlob(r,"image/png"));
+      name=F.name.replace(/\.[^.]+$/,"")+"_背景なし.png";
+    }
+    if(!blob||blob.size>MAX)throw new Error(useProc()?"背景を消した画像が20MBを超えました。元のファイルをお送りください。":"ファイルが大きすぎます（20MBまで）。");
+    const body=JSON.stringify({k:KEY,name,label,d:await toB64(blob)});
+    $("bar").hidden=false;$("barIn").style.width="0";
+    const r=await new Promise((ok,ng)=>{
+      const x=new XMLHttpRequest();
+      x.open("POST",ENDPOINT);x.timeout=240000;
+      x.setRequestHeader("Content-Type","text/plain;charset=utf-8");
+      x.upload.onprogress=e=>{if(e.lengthComputable)$("barIn").style.width=Math.round(e.loaded/e.total*95)+"%";};
+      x.onload=()=>{try{ok(JSON.parse(x.responseText));}catch(e){ng(new Error("受付から正しい返事がありませんでした。"));}};
+      x.onerror=()=>ng(new Error("通信に失敗しました。電波の良い場所で、もう一度お試しください。"));
+      x.ontimeout=()=>ng(new Error("時間がかかりすぎました。電波の良い場所で、もう一度お試しください。"));
+      x.send(body);
+    });
+    if(!r.ok)throw new Error(r.msg||"送信できませんでした。");
+    $("barIn").style.width="100%";
+    finish(r.url,name,blob.size,label);
+  }catch(e){err.textContent=e.message||"送信できませんでした。";$("bar").hidden=true;}
+  busy=false;$("upBtn").disabled=false;
+});
+
+function finish(url,name,size,label){
+  const m="【クラTマガジン】デザインを送ります\n学校名・お名前："+label+"\nファイル："+name+"（"+mb(size)+"）\nデザイン："+url+"\n※このURLは"+KEEP+"日後に自動で削除されます";
+  $("lineBtn").href="https://line.me/R/oaMessage/"+encodeURIComponent(LINE_ID)+"/?"+encodeURIComponent(m);
+  $("cbox").value=m;
+  $("snd").hidden=true;$("done").hidden=false;
+  $("done").scrollIntoView({behavior:"smooth"});
+}
+$("cpBtn").addEventListener("click",()=>{
+  const b=$("cbox");b.hidden=false;
+  const say=t=>$("cpMsg").textContent=t;
+  const man=()=>say("下の枠の文章を全選択してコピーし、公式LINEのトーク画面に貼り付けて送信してください。");
+  const fb=()=>{b.select();try{document.execCommand("copy")?say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。"):man();}catch(e){man();}};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(b.value).then(()=>say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。"),fb);else fb();
+});
+$("again").addEventListener("click",()=>{$("file").value="";reset();window.scrollTo({top:0,behavior:"smooth"});});
+</script>
+</body>
+</html>
