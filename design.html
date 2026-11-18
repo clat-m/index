@@ -2,89 +2,90 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>クラTマガジン デザイン送付</title>
 <style>
-:root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;--ok:#0a7a3c;--okbg:#e7f6ec;--ngbg:#fdecea;--ckA:#fff;--ckB:#d9dde6;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;--ok:#6fdc9a;--okbg:#14301f;--ngbg:#3a1c1a;--ckA:#2b3350;--ckB:#3a4466;color-scheme:dark}}
+:root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;--okbg:#e7f6ec;--ngbg:#fdecea;--wnbg:#fff4cc;--ckA:#fff;--ckB:#d9dde6;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;--okbg:#14301f;--ngbg:#3a1c1a;--wnbg:#3d3212;--ckA:#2b3350;--ckB:#3a4466;color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}
-main{max-width:560px;width:auto;margin:0 auto;padding:20px 16px 40px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.65;padding-bottom:env(safe-area-inset-bottom,0px);-webkit-text-size-adjust:100%}
+main{max-width:640px;width:auto;margin:0 auto;padding:18px 14px 40px}
 h1{font-size:1.35rem;margin:0 0 4px}
 h2{font-size:1.02rem;margin:0 0 8px}
-.lead{color:var(--sub);font-size:.9rem;margin:0 0 16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.lead{color:var(--sub);font-size:.9rem;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
 label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 6px}
 label:first-child{margin-top:0}
 .hint{font-weight:400;color:var(--sub);font-size:.8rem}
 .req{font-size:.7rem;background:var(--warn);color:#fff;border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:700}
-input[type=text],input[type=number],input[type=file]{width:100%;min-width:0;max-width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+input[type=text],input[type=number]{width:100%;min-width:0;max-width:100%;font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
 input:focus{outline:2px solid var(--acc);outline-offset:1px}
 .note{color:var(--sub);font-size:.8rem;margin:8px 0 0}
 .msg{color:var(--warn);font-weight:700;font-size:.9rem;margin:8px 0 0}
-.pv{background:repeating-conic-gradient(var(--ckB) 0% 25%,var(--ckA) 0% 50%) 0 0/16px 16px;border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center;margin:0 0 12px}
-.pv img,.pv canvas{max-width:100%;max-height:260px;width:auto;height:auto;display:inline-block;vertical-align:middle}
+.pv{background:repeating-conic-gradient(var(--ckB) 0% 25%,var(--ckA) 0% 50%) 0 0/16px 16px;border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center;margin:0 0 10px}
+.pv canvas{max-width:100%;height:auto}
 .res{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.9rem;background:var(--accsoft)}
 .res b{display:block}
-.res.ok{background:var(--okbg)}.res.ng{background:var(--ngbg)}
+.res.ok{background:var(--okbg)}.res.ng{background:var(--ngbg)}.res.wn{background:var(--wnbg)}
 .res i{font-style:normal;font-size:1.2rem;line-height:1.3}
-.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:end}
-.btn{display:block;width:100%;text-align:center;background:#1f4fd8;color:#fff;font:inherit;font-weight:700;padding:14px;border:0;border-radius:12px;text-decoration:none;margin-top:14px;cursor:pointer}
+.btn{display:block;width:100%;min-height:50px;text-align:center;background:#1f4fd8;color:#fff;font:inherit;font-weight:700;padding:14px;border:0;border-radius:12px;text-decoration:none;margin-top:12px;cursor:pointer}
 .btn.line{background:#06c755}
 .btn.sub{background:var(--accsoft);color:var(--acc)}
 .btn[disabled]{opacity:.5;cursor:default}
+.fh{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.th{width:64px;height:64px;flex:none;margin:0;padding:3px;display:grid;place-items:center}
+.th img{max-width:100%;max-height:100%}
+.fn{min-width:0;flex:1}
+.fn b{display:block;overflow-wrap:anywhere;font-size:.92rem;line-height:1.4}
+.x{flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--sub);font-size:1.3rem;cursor:pointer}
+.pwr{display:flex;gap:10px;align-items:center;margin:8px 0}
+.pwr label{margin:0;flex:1;font-size:.88rem}
+.pwr input{width:96px;flex:none}
+details{margin-top:10px;border-top:1px solid var(--line);padding-top:6px}
+summary{font-weight:700;font-size:.92rem;padding:10px 0;cursor:pointer}
+.zoom{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.zoom button{font:inherit;font-size:.85rem;padding:9px 12px;min-height:40px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);cursor:pointer}
+.zoom button[aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
+.viewer{overflow:auto;max-height:58vh;padding:0;text-align:left;-webkit-overflow-scrolling:touch}
+.viewer img{display:block;max-width:none}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cmp figure{margin:0}
+.cmp canvas{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:6px;background:#fff}
+.cmp figcaption{font-size:.78rem;color:var(--sub);margin-top:4px}
+input[type=range]{width:100%;height:32px}
 .radio{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:8px 0}
-.radio input{margin-top:5px}
-input[type=range]{width:100%}
+.radio input{margin-top:5px;width:20px;height:20px}
 .bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:12px}
-.bar div{height:100%;width:35%;background:var(--acc);border-radius:6px;animation:mv 1.1s ease-in-out infinite alternate}@keyframes mv{from{margin-left:0}to{margin-left:65%}}
-textarea{width:100%;font:inherit;font-size:14px;min-height:120px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.bar div{height:100%;width:35%;background:var(--acc);border-radius:6px;animation:mv 1.1s ease-in-out infinite alternate}
+@keyframes mv{from{margin-left:0}to{margin-left:65%}}
+.st{font-size:.85rem;font-weight:700;margin:6px 0 0}
+.st.ok{color:#0a7a3c}
+textarea{width:100%;font:inherit;font-size:14px;min-height:130px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
 <h1>デザインの送付</h1>
-<p class="lead">LINEに画像を直接送ると、画質が下がったり、透明な背景に色がついたりすることがあります。こちらから送ると、元の画質のままスタッフに届きます。</p>
+<p class="lead">LINEに画像を直接送ると、画質が下がったり、透明な背景に色がついたりすることがあります。こちらから送ると、元の画質のままスタッフに届きます。複数のファイルをまとめて送れます。</p>
 
 <div class="card">
 <label for="lab">学校名・お名前 <span class="req">必須</span><span class="hint">　注文内容と照らし合わせるために使います</span></label>
 <input type="text" id="lab" maxlength="30" placeholder="例：○○中学校 3年2組 山田" autocomplete="off">
-<label for="file">デザインのファイル <span class="hint">PNG・JPG・PDF・ai・psd／20MBまで</span></label>
-<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,image/png,image/jpeg,application/pdf">
+<label style="margin-top:16px">デザインのファイル <span class="hint">PNG・JPG・PDF・ai・psd／1ファイル20MBまで／10点まで</span></label>
+<button type="button" class="btn sub" id="pick" style="margin-top:0">ファイルを選ぶ（複数選べます）</button>
+<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.ai,.psd,image/png,image/jpeg,application/pdf" multiple hidden>
 <p class="msg" id="ferr" role="alert"></p>
 </div>
 
-<div class="card" id="chk" hidden>
-<h2>画質チェック</h2>
-<div class="pv" id="pv"></div>
-<div id="info"></div>
-<div class="row" id="widthRow">
-<div><label for="pw" style="margin-top:0">プリントの横幅（cm）<span class="hint"> 最大30cm</span></label><input type="number" id="pw" value="30" min="3" max="30" step="1" inputmode="numeric"></div>
-<p class="note" style="margin:0">この大きさで印刷したときの細かさ（dpi）を計算します。</p>
-</div>
-</div>
-
-<div class="card" id="bgc" hidden>
-<h2>背景を消す（任意）</h2>
-<p class="note" style="margin:0 0 8px">背景が白や単色の画像から、背景を透明にします。四隅の色と近い色を、外側から消していきます。文字の中の白などは消えません。</p>
-<label for="tol" style="margin-top:8px">消す色の範囲 <span class="hint" id="tolv"></span></label>
-<input type="range" id="tol" min="2" max="40" value="12">
-<button type="button" class="btn sub" id="rmBtn">背景を消す</button>
-<p class="msg" id="rmErr" role="alert"></p>
-<div class="pv" id="pv2" hidden style="margin-top:12px"></div>
-<div id="pick" hidden>
-<label style="margin-top:4px">どちらを送りますか？</label>
-<label class="radio"><input type="radio" name="use" value="orig" checked><span>元のファイルをそのまま送る</span></label>
-<label class="radio"><input type="radio" name="use" value="proc"><span>背景を消した画像（PNG）を送る</span></label>
-</div>
-<p class="note">きれいに消えない場合は「消す色の範囲」を変えて、もう一度押してください。うまくいかなければ、元のファイルをお送りいただければスタッフが対応します。</p>
-</div>
+<div id="list"></div>
 
 <div class="card" id="snd" hidden>
 <h2>送信</h2>
 <p class="note" style="margin:0 0 4px">送信すると、ファイルは制作確認のために一時的に預かります。<b><span id="keep">14</span>日後に自動で削除</b>されます。制作の確認以外には使用しません。</p>
 <button type="button" class="btn" id="upBtn">デザインを送信する</button>
-<div class="bar" id="bar" hidden><div id="barIn"></div></div>
+<p class="st" id="prog" hidden></p>
+<div class="bar" id="bar" hidden><div></div></div>
 <p class="msg" id="uerr" role="alert"></p>
 </div>
 
@@ -98,177 +99,274 @@ textarea{width:100%;font:inherit;font-size:14px;min-height:120px;padding:10px;bo
 <p class="note">ご注文の内容は、見積りページから別にお送りください。</p>
 <button type="button" class="btn sub" id="again">別のファイルを送る</button>
 </div>
-<p class="note" style="text-align:center;margin-top:18px">ver.2</p>
+<p class="note" style="text-align:center;margin-top:18px">ver.3</p>
 </main>
 
 <script>
-const ENDPOINT="https://script.google.com/macros/s/AKfycbz8qgWLyqQjLrdNPFskwNr1kfQuYG6heYsj8TwsQHGldLavypd-Mabf18muAh9THCsHFA/exec";            // ← Apps Scriptの「ウェブアプリのURL」をここに貼ります
-const KEY="clat-design-2026"; // ← Code.gs の KEY と同じ文字にします
-const LINE_ID="@clat-m", MAX=20*1024*1024, KEEP=14, MAXPX=16e6;
+const ENDPOINT="https://script.google.com/macros/s/AKfycbz8qgWLyqQjLrdNPFskwNr1kfQuYG6heYsj8TwsQHGldLavypd-Mabf18muAh9THCsHFA/exec";
+const KEY="clat-design-2026"; // Code.gs の KEY と同じ文字にします
+const LINE_ID="@clat-m",MAX=20*1024*1024,KEEP=14,MAXPX=16e6,MAXN=10;
 const OKEXT=["png","jpg","jpeg","pdf","ai","psd"];
 const $=id=>document.getElementById(id);
-let F=null,IMG=null,PROC=null,busy=false;
 const ext=n=>(n.split(".").pop()||"").toLowerCase();
-const mb=b=>(b/1048576).toFixed(b<1048576*10?1:0)+"MB";
+const mb=b=>b<1048576?Math.max(1,Math.round(b/1024))+"KB":(b/1048576).toFixed(b<1048576*10?1:0)+"MB";
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const res=(cls,ico,t,d)=>'<div class="res '+cls+'"><i>'+ico+'</i><div><b>'+t+'</b>'+(d||"")+'</div></div>';
+let L=[],seq=0,busy=false,queue=Promise.resolve();
 $("keep").textContent=KEEP;
 
-function res(cls,ico,t,d){return '<div class="res '+cls+'"><i>'+ico+'</i><div><b>'+t+'</b>'+(d||"")+'</div></div>';}
-
-function reset(){
-  F=null;IMG=null;PROC=null;
-  ["chk","bgc","snd","done"].forEach(i=>$(i).hidden=true);
-  $("pv").innerHTML="";$("pv2").innerHTML="";$("pv2").hidden=true;$("pick").hidden=true;
-  $("info").innerHTML="";$("ferr").textContent="";$("uerr").textContent="";$("rmErr").textContent="";
-  document.querySelector('input[name=use][value=orig]').checked=true;
-}
-
-$("file").addEventListener("change",async e=>{
-  reset();
-  const f=e.target.files[0];if(!f)return;
-  const x=ext(f.name);
-  if(OKEXT.indexOf(x)<0){$("ferr").textContent="この形式は受け付けていません（PNG・JPG・PDF・ai・psdのみ）。";e.target.value="";return;}
-  if(f.size>MAX){$("ferr").textContent="ファイルが大きすぎます（"+mb(f.size)+"）。20MBまでです。";e.target.value="";return;}
-  F=f;
-  $("chk").hidden=false;$("snd").hidden=false;
-  if(x==="png"||x==="jpg"||x==="jpeg")await checkImage(f,x);
-  else{
-    $("widthRow").hidden=true;
-    $("pv").innerHTML='<div style="padding:22px 8px;font-weight:700">'+esc(f.name)+'</div>';
-    $("info").innerHTML=res("","📄",x.toUpperCase()+"ファイルを受け付けました","この形式は、こちらでは画質チェックができません。スタッフが確認します。");
+// ---------- ファイルの追加 ----------
+$("pick").addEventListener("click",()=>$("file").click());
+$("file").addEventListener("change",e=>{addFiles([].slice.call(e.target.files));e.target.value="";});
+function addFiles(fs){
+  if(busy)return;
+  const bad=[];
+  $("done").hidden=true;
+  for(const f of fs){
+    if(L.length>=MAXN){bad.push("一度に送れるのは"+MAXN+"点までです。");break;}
+    const x=ext(f.name);
+    if(OKEXT.indexOf(x)<0){bad.push(f.name+"：この形式は受け付けていません（PNG・JPG・PDF・ai・psdのみ）");continue;}
+    if(f.size>MAX){bad.push(f.name+"：大きすぎます（"+mb(f.size)+"）。20MBまでです");continue;}
+    if(L.some(o=>o.f.name===f.name&&o.f.size===f.size&&o.f.lastModified===f.lastModified))continue;
+    const it={id:++seq,f,x,pw:30,zoom:1,up:null,proc:null};
+    L.push(it);build(it);
+    queue=queue.then(()=>analyze(it)).catch(()=>{});
   }
-});
+  $("ferr").innerHTML=bad.map(esc).join("<br>");
+  sync();
+}
+function sync(){
+  $("snd").hidden=!L.length;
+  $("upBtn").textContent=L.length>1?L.length+"点のデザインをまとめて送信する":"デザインを送信する";
+}
+function build(it){
+  const el=document.createElement("section");el.className="card f";el.dataset.id=it.id;
+  const img=it.x==="png"||it.x==="jpg"||it.x==="jpeg";
+  el.innerHTML='<div class="fh"><div class="pv th"><img alt="" hidden></div><div class="fn"><b>'+esc(it.f.name)+'</b><span class="hint">'+mb(it.f.size)+'</span></div><button type="button" class="x" data-a="rm" aria-label="このファイルを外す">×</button></div>'+
+  '<div class="info">'+(img?'<p class="note">確認しています…</p>':res("","📄",it.x.toUpperCase()+"ファイルを受け付けました","この形式は、こちらでは画質・色のチェックができません。スタッフが確認します。"))+'</div>'+
+  (img?'<div class="pwr"><label for="pw'+it.id+'">プリントの横幅（cm）<span class="hint"> 最大30cm</span></label><input type="number" id="pw'+it.id+'" data-a="pw" value="30" min="3" max="30" step="1" inputmode="numeric"></div>'+
+  '<details open class="dz" hidden><summary>実寸プレビュー</summary><div class="zoom"><button type="button" data-a="z" data-z="1" aria-pressed="true">実寸の目安</button><button type="button" data-a="z" data-z="2" aria-pressed="false">2倍</button><button type="button" data-a="z" data-z="4" aria-pressed="false">4倍</button><button type="button" data-a="z" data-z="fit" aria-pressed="false">全体表示</button></div><div class="pv viewer"><img alt="" class="big"></div><p class="note">画面の表示は目安です（1cm＝約38px換算）。拡大して、フチのギザギザやにじみが気にならないか確認できます。横や縦にスクロールできます。</p></details>'+
+  '<details class="cd" hidden><summary>印刷したときの色の見え方</summary><div class="cmp"><figure><div class="cvA"></div><figcaption>元の画像（画面表示）</figcaption></figure><figure><div class="cvB"></div><figcaption>CMYK印刷の見え方（目安）</figcaption></figure></div><p class="note">CMYK側は簡易シミュレーションです。実際の色は印刷機・インク・変換設定で変わります。色味が大切な場合は、LINEでスタッフにご相談ください。</p></details>'+
+  '<details class="bd" hidden><summary>背景を消す（任意）</summary><p class="note" style="margin:0 0 6px">背景が白や単色の画像から、背景を透明にします。四隅の色と近い色を、外側から消していきます。文字の中の白などは消えません。</p><label style="margin-top:8px">消す色の範囲 <span class="hint tv"></span></label><input type="range" data-a="tol" min="2" max="40" value="12"><button type="button" class="btn sub" data-a="rmbg">背景を消す</button><p class="msg rmErr" role="alert"></p><div class="pv pv2" hidden style="margin-top:10px"></div><div class="pk" hidden><label style="margin-top:4px">どちらを送りますか？</label><label class="radio"><input type="radio" name="u'+it.id+'" value="orig" checked><span>元のファイルをそのまま送る</span></label><label class="radio"><input type="radio" name="u'+it.id+'" value="proc"><span>背景を消した画像（PNG）を送る</span></label></div><p class="note">きれいに消えない場合は「消す色の範囲」を変えて、もう一度押してください。うまくいかなければ、元のファイルをお送りいただければスタッフが対応します。</p></details>':'')+
+  '<p class="st" hidden></p>';
+  it.el=el;$("list").appendChild(el);
+}
+const q=(it,s)=>it.el.querySelector(s);
 
+// ---------- 読み込みと判定 ----------
 function loadImg(f){return new Promise((ok,ng)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>ok({el:i,url:u});i.onerror=()=>{URL.revokeObjectURL(u);ng();};i.src=u;});}
-
-async function checkImage(f,x){
-  let L;
-  try{L=await loadImg(f);}catch(e){$("ferr").textContent="画像を読み込めませんでした。ファイルが壊れていないかご確認ください。";$("chk").hidden=true;$("snd").hidden=true;return;}
-  const w=L.el.naturalWidth,h=L.el.naturalHeight;
-  IMG={el:L.el,w,h,x};
-  $("widthRow").hidden=false;
-  $("pv").innerHTML='<img alt="選んだ画像" src="'+L.url+'">';
-  // 透明・背景の判定（縮小して調べる）
-  const k=Math.min(1,1200/Math.max(w,h)),cw=Math.max(1,Math.round(w*k)),ch=Math.max(1,Math.round(h*k));
+async function analyze(it){
+  if(!L.includes(it)||(it.x!=="png"&&it.x!=="jpg"&&it.x!=="jpeg"))return;
+  let r;
+  try{r=await loadImg(it.f);}catch(e){q(it,".info").innerHTML=res("ng","❗","画像を読み込めませんでした","ファイルが壊れていないかご確認ください。");return;}
+  if(!L.includes(it)){URL.revokeObjectURL(r.url);return;}
+  it.img=r.el;it.url=r.url;it.w=r.el.naturalWidth;it.h=r.el.naturalHeight;
+  const th=q(it,".th img");th.src=r.url;th.hidden=false;
+  q(it,".big").src=r.url;q(it,".dz").hidden=false;
+  const k=Math.min(1,1200/Math.max(it.w,it.h)),cw=Math.max(1,Math.round(it.w*k)),ch=Math.max(1,Math.round(it.h*k));
   const c=document.createElement("canvas");c.width=cw;c.height=ch;
-  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(L.el,0,0,cw,ch);
+  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(r.el,0,0,cw,ch);
   const d=g.getImageData(0,0,cw,ch).data;
   let tr=0;for(let i=3;i<d.length;i+=4)if(d[i]<250)tr++;
-  const alpha=tr/(cw*ch)>0.002;
+  it.alpha=tr/(cw*ch)>0.002;
   const px=(X,Y)=>{const i=(Y*cw+X)*4;return[d[i],d[i+1],d[i+2]];};
   const cs=[px(0,0),px(cw-1,0),px(0,ch-1),px(cw-1,ch-1)];
-  const near=cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<40);
-  IMG.alpha=alpha;IMG.bgSame=near&&!alpha;
-  const sw='<span style="display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;background:rgb('+cs[0].join(",")+')"></span>';
+  it.corner=cs[0];
+  it.bgSame=!it.alpha&&cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<40);
+  q(it,".bd").hidden=it.alpha||it.w*it.h>MAXPX;
+  await colorCheck(it);
+  render(it);
+  applyZoom(it);
+}
+
+// ---------- 色モード（添付ツールと同じ判定） ----------
+const ascii=(u,a,b)=>{let s="";for(let i=a;i<b&&i<u.length;i++)s+=String.fromCharCode(u[i]);return s;};
+function profName(u){const m=ascii(u,0,4096).match(/sRGB[ -~]{0,24}|Adobe RGB[ -~]{0,14}|Display P3|Japan Color[ -~]{0,20}|U.S. Web Coated[ -~]{0,14}|FOGRA[0-9]+|SWOP/);return m?m[0].replace(/[<>&]/g,"").trim():"";}
+function parseMode(buf){
+  const u=new Uint8Array(buf),r={mode:"RGB",prof:""};let i,m,len;
+  if(u[0]===255&&u[1]===216){
+    i=2;
+    while(i<u.length-10){
+      if(u[i]!==255){i++;continue;}
+      m=u[i+1];
+      if(m===255){i++;continue;}
+      if(m===216||m===1||(m>=208&&m<=215)){i+=2;continue;}
+      len=(u[i+2]<<8)|u[i+3];
+      if(m===226&&ascii(u,i+4,i+15)==="ICC_PROFILE"&&!r.prof)r.prof=profName(u.subarray(i+18,i+2+len));
+      if(m>=192&&m<=207&&m!==196&&m!==200&&m!==204){const n=u[i+9];r.mode=n===4?"CMYK":(n===1?"GRAY":"RGB");break;}
+      i+=2+len;
+    }
+  }else if(u[0]===137&&u[1]===80){
+    const ct=u[25],dv=new DataView(buf);let p=8;
+    r.mode=(ct===0||ct===4)?"GRAY":"RGB";r.png=true;
+    while(p+8<u.length){const cl=dv.getUint32(p),ty=ascii(u,p+4,p+8);if(ty==="iCCP"){const nm=ascii(u,p+8,p+48),z=nm.indexOf(String.fromCharCode(0));r.prof=nm.substring(0,z>0?z:0).replace(/[<>&]/g,"");break;}if(ty==="IDAT")break;p+=12+cl;}
+  }
+  return r;
+}
+const CK=[[35,31,32],[237,28,36],[0,166,81],[46,49,146],[255,242,0],[0,174,239],[236,0,140]];
+async function colorCheck(it){
+  let r;
+  try{r=parseMode(await it.f.slice(0,1048576).arrayBuffer());}catch(e){r={mode:"RGB",prof:""};}
+  const im=it.img,s=Math.min(1,800/Math.max(it.w,it.h)),w=Math.max(1,Math.round(it.w*s)),h=Math.max(1,Math.round(it.h*s));
+  const t=document.createElement("canvas");t.width=w;t.height=h;
+  const x=t.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,w,h);
+  const dd=x.getImageData(0,0,w,h),a=dd.data,o=x.createImageData(w,h),qq=o.data;let far=0,nw=0;
+  for(let i=0;i<a.length;i+=4){
+    const al=a[i+3]/255,R=a[i]*al+255*(1-al),G=a[i+1]*al+255*(1-al),B=a[i+2]*al+255*(1-al);
+    a[i]=R;a[i+1]=G;a[i+2]=B;a[i+3]=255;
+    const X=R/255,Y=G/255,Z=B/255;
+    const W=[(1-X)*(1-Y)*(1-Z),X*(1-Y)*(1-Z),(1-X)*Y*(1-Z),(1-X)*(1-Y)*Z,X*Y*(1-Z),(1-X)*Y*Z,X*(1-Y)*Z];
+    for(let c=0;c<3;c++){let v=X*Y*Z*255;for(let j=0;j<7;j++)v+=W[j]*CK[j][c];qq[i+c]=v;}
+    qq[i+3]=255;
+    if(R+G+B<740){nw++;const dr=qq[i]-R,dg=qq[i+1]-G,db=qq[i+2]-B;if(dr*dr+dg*dg+db*db>3600)far++;}
+  }
+  it.col={mode:r.mode,prof:r.prof,png:r.png,ratio:nw?far/nw:0};
+  if(r.mode==="RGB"){
+    const cA=document.createElement("canvas"),cB=document.createElement("canvas");
+    cA.width=cB.width=w;cA.height=cB.height=h;
+    cA.getContext("2d").putImageData(dd,0,0);cB.getContext("2d").putImageData(o,0,0);
+    q(it,".cvA").appendChild(cA);q(it,".cvB").appendChild(cB);q(it,".cd").hidden=false;
+  }
+}
+function colorRow(it){
+  const c=it.col;if(!c)return"";
+  const modeTxt=c.mode==="CMYK"?"CMYK":(c.mode==="GRAY"?"グレースケール":"RGB");
+  const prof=c.prof||(c.mode==="CMYK"?"埋め込みなし／不明":"埋め込みなし（一般にsRGBとして表示されます）");
+  const facts="色モード："+modeTxt+(c.png?"（PNG・スクショはRGB形式です）":"")+"<br>カラープロファイル："+esc(prof)+"<br>";
+  const pct=Math.round(c.ratio*100);
+  if(c.mode==="CMYK")return res("ok","🎨","色の確認",facts+"CMYKデータです。印刷に近い色で作られているため、RGBからの変換による色の変化は小さいと考えられます。");
+  if(c.mode==="GRAY")return res("ok","🎨","色の確認",facts+"グレースケール画像です。色の変化の心配はほぼありません。");
+  if(c.ratio>0.25)return res("wn","⚠️","色にご注意ください",facts+"RGBデータです。鮮やかな青・緑・ピンクなどが多く、印刷（CMYK）するとくすんで見える可能性が高いです（差が大きい色の割合：約"+pct+"%）。");
+  if(c.ratio>0.08)return res("wn","⚠️","色にご注意ください",facts+"RGBデータです。一部の鮮やかな色が、印刷（CMYK）で少しくすむ可能性があります（差が大きい色の割合：約"+pct+"%）。");
+  return res("","🎨","色の確認",facts+"RGBデータですが、印刷（CMYK）にしても色の変化は小さいと考えられます（差が大きい色の割合：約"+pct+"%）。");
+}
+
+// ---------- 画質・透明の表示 ----------
+function render(it){
+  const cm=Math.min(30,Math.max(3,it.pw||30)),dpi=Math.round(it.w/(cm/2.54));
+  const sz="画像の大きさ：横"+it.w+"px × 縦"+it.h+"px<br>"+cm+"cm幅で印刷すると、約"+dpi+"dpi";
+  let a;
+  if(dpi>=150)a=res("ok","✅","きれいに印刷できます",sz);
+  else if(dpi>=100)a=res("wn","⚠️","少し粗くなる可能性があります",sz+"<br>可能であれば、もっと大きな画像をご用意ください。");
+  else a=res("ng","❗","印刷すると粗くなる可能性が高いです",sz+"<br>スクリーンショットやLINEで受け取った画像ではありませんか？元のデータがあればそちらをお送りください。そのまま送ることもできます。");
+  const sw='<span style="display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;background:rgb('+(it.corner||[255,255,255]).join(",")+')"></span>';
   let t;
-  if(alpha)t=res("ok","✅","背景が透明です","このまま送れば、透明のままスタッフに届きます。");
-  else if(x!=="png")t=res("","ℹ️","JPG形式です","JPGは背景を透明にできない形式です。"+(IMG.bgSame?"背景に単色"+sw+"がついています。透明にしたい場合は、下の「背景を消す」をお使いください。":""));
-  else if(IMG.bgSame)t=res("","ℹ️","背景に色がついています "+sw,"透明にしたい場合は、下の「背景を消す」をお使いください。");
+  if(it.alpha)t=res("ok","✅","背景が透明です","このまま送れば、透明のままスタッフに届きます。");
+  else if(it.x!=="png")t=res("","ℹ️","JPG形式です","JPGは背景を透明にできない形式です。"+(it.bgSame?"背景に単色"+sw+"がついています。透明にしたい場合は、「背景を消す」をお使いください。":""));
+  else if(it.bgSame)t=res("","ℹ️","背景に色がついています "+sw,"透明にしたい場合は、「背景を消す」をお使いください。");
   else t=res("","ℹ️","背景は透明ではありません","写真など、背景がある画像です。");
-  IMG.tHtml=t;
-  $("bgc").hidden=alpha||w*h>MAXPX;
-  if(!alpha&&w*h>MAXPX)IMG.tHtml+=res("","ℹ️","背景を消す機能は使えません","画像が大きいため、この機能は使えません。元のファイルをお送りください。");
-  showQuality();
+  if(!it.alpha&&it.w*it.h>MAXPX)t+=res("","ℹ️","背景を消す機能は使えません","画像が大きいため、この機能は使えません。元のファイルをお送りください。");
+  q(it,".info").innerHTML=a+t+colorRow(it);
 }
 
-function showQuality(){
-  if(!IMG)return;
-  const cm=Math.min(30,Math.max(3,parseFloat($("pw").value)||30));
-  const dpi=Math.round(IMG.w/(cm/2.54));
-  let q;
-  const sz="画像の大きさ：横"+IMG.w+"px × 縦"+IMG.h+"px<br>"+cm+"cm幅で印刷すると、約"+dpi+"dpi";
-  if(dpi>=150)q=res("ok","✅","きれいに印刷できます",sz);
-  else if(dpi>=100)q=res("","⚠️","少し粗くなる可能性があります",sz+"<br>可能であれば、もっと大きな画像をご用意ください。");
-  else q=res("ng","❗","印刷すると粗くなる可能性が高いです",sz+"<br>スクリーンショットやLINEで受け取った画像ではありませんか？元のデータがあればそちらをお送りください。そのまま送ることもできます。");
-  $("info").innerHTML=q+IMG.tHtml;
+// ---------- 実寸プレビュー ----------
+function applyZoom(it){
+  const im=q(it,".big");if(!im||!it.w)return;
+  if(it.zoom==="fit"){im.style.width="100%";im.style.maxWidth="100%";return;}
+  im.style.maxWidth="none";im.style.width=(Math.min(30,Math.max(3,it.pw||30))*37.8*it.zoom)+"px";
 }
-$("pw").addEventListener("input",showQuality);
 
-// 背景を消す
-$("tol").addEventListener("input",()=>{$("tolv").textContent=$("tol").value<=8?"（せまい）":$("tol").value>=25?"（ひろい）":"（ふつう）";});
-$("tol").dispatchEvent(new Event("input"));
-$("rmBtn").addEventListener("click",()=>{
-  $("rmErr").textContent="";
-  if(!IMG)return;
-  $("rmBtn").disabled=true;$("rmBtn").textContent="処理中…";
-  setTimeout(()=>{try{removeBg();}catch(e){$("rmErr").textContent="処理に失敗しました。元のファイルをお送りください。";}$("rmBtn").disabled=false;$("rmBtn").textContent="背景を消す";},30);
-});
-function removeBg(){
-  const w=IMG.w,h=IMG.h;
+// ---------- 背景を消す ----------
+function removeBg(it){
+  const w=it.w,h=it.h,err=q(it,".rmErr");
   const c=document.createElement("canvas");c.width=w;c.height=h;
-  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(IMG.el,0,0);
+  const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(it.img,0,0);
   const id=g.getImageData(0,0,w,h),d=id.data;
   const at=p=>[d[p*4],d[p*4+1],d[p*4+2]];
   const cs=[at(0),at(w-1),at((h-1)*w),at(h*w-1)];
-  if(!cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<60)){$("rmErr").textContent="四隅の色がそろっていないため、自動では消せません。元のファイルをお送りください。";return;}
+  if(!cs.every(a=>Math.hypot(a[0]-cs[0][0],a[1]-cs[0][1],a[2]-cs[0][2])<60)){err.textContent="四隅の色がそろっていないため、自動では消せません。元のファイルをお送りください。";return;}
   const r=Math.round(cs.reduce((s,a)=>s+a[0],0)/4),gg=Math.round(cs.reduce((s,a)=>s+a[1],0)/4),b=Math.round(cs.reduce((s,a)=>s+a[2],0)/4);
-  const thr=$("tol").value/100*441.67,t2=thr*thr;
+  const thr=q(it,"[data-a=tol]").value/100*441.67,t2=thr*thr;
   const dd=p=>{const i=p*4,A=d[i]-r,B=d[i+1]-gg,C=d[i+2]-b;return A*A+B*B+C*C;};
-  const rm=new Uint8Array(w*h),q=new Int32Array(w*h);let qh=0,qt=0;
-  const push=p=>{if(!rm[p]&&dd(p)<=t2){rm[p]=1;q[qt++]=p;}};
+  const rm=new Uint8Array(w*h),qu=new Int32Array(w*h);let qh=0,qt=0;
+  const push=p=>{if(!rm[p]&&dd(p)<=t2){rm[p]=1;qu[qt++]=p;}};
   for(let x=0;x<w;x++){push(x);push((h-1)*w+x);}
   for(let y=0;y<h;y++){push(y*w);push(y*w+w-1);}
-  while(qh<qt){const p=q[qh++],px=p%w;if(px>0)push(p-1);if(px<w-1)push(p+1);if(p>=w)push(p-w);if(p<w*(h-1))push(p+w);}
+  while(qh<qt){const p=qu[qh++],px=p%w;if(px>0)push(p-1);if(px<w-1)push(p+1);if(p>=w)push(p-w);if(p<w*(h-1))push(p+w);}
   const ratio=qt/(w*h);
-  if(ratio<0.005){$("rmErr").textContent="消せる背景が見つかりませんでした。「消す色の範囲」をひろげてお試しください。";return;}
-  if(ratio>0.97){$("rmErr").textContent="ほとんどが消えてしまいました。「消す色の範囲」をせまくしてお試しください。";return;}
+  if(ratio<0.005){err.textContent="消せる背景が見つかりませんでした。「消す色の範囲」をひろげてお試しください。";return;}
+  if(ratio>0.97){err.textContent="ほとんどが消えてしまいました。「消す色の範囲」をせまくしてお試しください。";return;}
   for(let p=0;p<w*h;p++){
     if(rm[p]){d[p*4+3]=0;continue;}
     const px=p%w;
-    if((px>0&&rm[p-1])||(px<w-1&&rm[p+1])||(p>=w&&rm[p-w])||(p<w*(h-1)&&rm[p+w])){ // ふちをなめらかに
+    if((px>0&&rm[p-1])||(px<w-1&&rm[p+1])||(p>=w&&rm[p-w])||(p<w*(h-1)&&rm[p+w])){
       const v=Math.sqrt(dd(p));
       if(v<thr*2)d[p*4+3]=Math.round(255*Math.min(1,Math.max(0,(v-thr)/thr)));
     }
   }
   g.putImageData(id,0,0);
-  PROC=c;
-  $("pv2").innerHTML="";$("pv2").appendChild(c);$("pv2").hidden=false;$("pick").hidden=false;
-  document.querySelector('input[name=use][value=proc]').checked=true;
+  it.proc=c;
+  const p2=q(it,".pv2");p2.innerHTML="";p2.appendChild(c);p2.hidden=false;q(it,".pk").hidden=false;
+  q(it,"input[value=proc]").checked=true;
 }
 
-// 送信
-function useProc(){return PROC&&document.querySelector('input[name=use]:checked').value==="proc";}
+// ---------- 操作（カードの中） ----------
+const find=e=>{const el=e.target.closest(".f");return el&&L.find(o=>o.id==el.dataset.id);};
+$("list").addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]");if(!b)return;const it=find(e);if(!it||busy)return;
+  const a=b.dataset.a;
+  if(a==="rm"){if(it.url)URL.revokeObjectURL(it.url);L=L.filter(o=>o!==it);it.el.remove();sync();$("ferr").textContent="";}
+  else if(a==="z"){it.zoom=b.dataset.z==="fit"?"fit":+b.dataset.z;[].forEach.call(b.parentNode.children,x=>x.setAttribute("aria-pressed",x===b));applyZoom(it);}
+  else if(a==="rmbg"){
+    q(it,".rmErr").textContent="";b.disabled=true;b.textContent="処理中…";
+    setTimeout(()=>{try{removeBg(it);}catch(x){q(it,".rmErr").textContent="処理に失敗しました。元のファイルをお送りください。";}b.disabled=false;b.textContent="背景を消す";},30);
+  }
+});
+$("list").addEventListener("input",e=>{
+  const b=e.target.closest("[data-a]");if(!b)return;const it=find(e);if(!it)return;
+  if(b.dataset.a==="pw"){it.pw=parseFloat(b.value)||30;if(it.col||it.w){render(it);applyZoom(it);}}
+  else if(b.dataset.a==="tol"){q(it,".tv").textContent=b.value<=8?"（せまい）":b.value>=25?"（ひろい）":"（ふつう）";}
+});
+
+// ---------- 送信 ----------
+const useProc=it=>it.proc&&q(it,"input[name=u"+it.id+"]:checked").value==="proc";
 function toB64(blob){return new Promise((ok,ng)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]||"");r.onerror=ng;r.readAsDataURL(blob);});}
+async function up1(it,label){
+  let blob=it.f,name=it.f.name;
+  if(useProc(it)){blob=await new Promise(r=>it.proc.toBlob(r,"image/png"));name=it.f.name.replace(/\.[^.]+$/,"")+"_背景なし.png";}
+  if(!blob||blob.size>MAX)throw new Error(useProc(it)?"背景を消した画像が20MBを超えました。元のファイルをお送りください。":"ファイルが大きすぎます（20MBまで）。");
+  const body=JSON.stringify({k:KEY,name,label,d:await toB64(blob)});
+  let r;
+  try{
+    const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),240000);
+    const resp=await fetch(ENDPOINT,{method:"POST",body,signal:ctl.signal,redirect:"follow"});
+    clearTimeout(tm);
+    try{r=JSON.parse(await resp.text());}catch(e){throw new Error("受付から正しい返事がありませんでした。");}
+  }catch(e){
+    if(e&&e.message&&e.message.indexOf("受付")===0)throw e;
+    throw new Error(e&&e.name==="AbortError"?"時間がかかりすぎました。電波の良い場所で、もう一度お試しください。":"通信に失敗しました。電波の良い場所で、もう一度お試しください。");
+  }
+  if(!r.ok)throw new Error(r.msg||"送信できませんでした。");
+  return{url:r.url,name:r.name||name,size:blob.size};
+}
+const setSt=(it,t,ok)=>{const s=q(it,".st");s.hidden=!t;s.textContent=t;s.className="st"+(ok?" ok":" msg");};
 $("upBtn").addEventListener("click",async()=>{
   if(busy)return;
   const err=$("uerr");err.textContent="";
   const label=$("lab").value.trim();
   if(!label){err.textContent="「学校名・お名前」を入力してください。";$("lab").focus();return;}
-  if(!F){err.textContent="ファイルを選んでください。";return;}
+  if(!L.length){err.textContent="ファイルを選んでください。";return;}
   if(!ENDPOINT){err.textContent="送信の準備中です。しばらくしてからお試しください。";return;}
-  busy=true;$("upBtn").disabled=true;
-  try{
-    let blob=F,name=F.name;
-    if(useProc()){
-      blob=await new Promise(r=>PROC.toBlob(r,"image/png"));
-      name=F.name.replace(/\.[^.]+$/,"")+"_背景なし.png";
-    }
-    if(!blob||blob.size>MAX)throw new Error(useProc()?"背景を消した画像が20MBを超えました。元のファイルをお送りください。":"ファイルが大きすぎます（20MBまで）。");
-    const body=JSON.stringify({k:KEY,name,label,d:await toB64(blob)});
-    $("bar").hidden=false;
-    let r;
-    try{
-      const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),240000);
-      // ヘッダーを付けない単純なPOST（ブラウザの事前確認が発生しない形）
-      const resp=await fetch(ENDPOINT,{method:"POST",body,signal:ctl.signal,redirect:"follow"});
-      clearTimeout(tm);
-      try{r=JSON.parse(await resp.text());}catch(e){throw new Error("受付から正しい返事がありませんでした。");}
-    }catch(e){
-      if(e&&e.message&&e.message.indexOf("受付")===0)throw e;
-      throw new Error(e&&e.name==="AbortError"?"時間がかかりすぎました。電波の良い場所で、もう一度お試しください。":"通信に失敗しました。電波の良い場所で、もう一度お試しください。");
-    }
-    if(!r.ok)throw new Error(r.msg||"送信できませんでした。");
-    $("bar").hidden=true;
-    finish(r.url,name,blob.size,label);
-  }catch(e){err.textContent=e.message||"送信できませんでした。";$("bar").hidden=true;}
+  busy=true;$("upBtn").disabled=true;$("bar").hidden=false;
+  const todo=L.filter(o=>!o.up);let fail=0;
+  for(let i=0;i<todo.length;i++){
+    const it=todo[i];
+    $("prog").hidden=false;$("prog").textContent=(i+1)+"／"+todo.length+" 点を送信中…（画面を閉じずにお待ちください）";
+    setSt(it,"送信中…",true);
+    try{it.up=await up1(it,label);setSt(it,"✓ 送信済み",true);}
+    catch(e){fail++;setSt(it,e.message||"送信できませんでした。",false);}
+  }
+  $("bar").hidden=true;$("prog").hidden=true;
   busy=false;$("upBtn").disabled=false;
+  if(fail){err.textContent=fail+"点が送信できませんでした。もう一度ボタンを押すと、送信できていない分だけ送り直します。";return;}
+  finish(label);
 });
-
-function finish(url,name,size,label){
-  const m="【クラTマガジン】デザインを送ります\n学校名・お名前："+label+"\nファイル："+name+"（"+mb(size)+"）\nデザイン："+url+"\n※このURLは"+KEEP+"日後に自動で削除されます";
+function finish(label){
+  const m="【クラTマガジン】デザインを送ります\n学校名・お名前："+label+"\nデザイン（"+L.length+"点）\n"+
+    L.map((o,i)=>(i+1)+"）"+o.up.name+"（"+mb(o.up.size)+"）\n"+o.up.url).join("\n")+"\n※このURLは"+KEEP+"日後に自動で削除されます";
   $("lineBtn").href="https://line.me/R/oaMessage/"+encodeURIComponent(LINE_ID)+"/?"+encodeURIComponent(m);
   $("cbox").value=m;
-  $("snd").hidden=true;$("done").hidden=false;
+  $("snd").hidden=true;$("list").hidden=true;$("done").hidden=false;
   $("done").scrollIntoView({behavior:"smooth"});
 }
 $("cpBtn").addEventListener("click",()=>{
@@ -278,7 +376,11 @@ $("cpBtn").addEventListener("click",()=>{
   const fb=()=>{b.select();try{document.execCommand("copy")?say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。"):man();}catch(e){man();}};
   if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(b.value).then(()=>say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。"),fb);else fb();
 });
-$("again").addEventListener("click",()=>{$("file").value="";reset();window.scrollTo({top:0,behavior:"smooth"});});
+$("again").addEventListener("click",()=>{
+  L.forEach(o=>{if(o.url)URL.revokeObjectURL(o.url);});
+  L=[];$("list").innerHTML="";$("list").hidden=false;$("done").hidden=true;$("cbox").hidden=true;$("cpMsg").textContent="";$("uerr").textContent="";
+  sync();window.scrollTo({top:0,behavior:"smooth"});
+});
 </script>
 </body>
 </html>
