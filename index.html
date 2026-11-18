@@ -269,7 +269,7 @@ const rowsC=()=>[].slice.call(document.querySelectorAll(".crow")).map(r=>{const 
 const cnt=s=>Object.keys(s).reduce((a,k)=>a + s[k],0);
 function sumSizes(){const sum=rowsC().reduce((a,r)=>a + cnt(r.s),0);$("ssum").textContent="合計 " + sum + "枚 / 注文 " +(LAST?LAST.q:0)+ "枚";return sum;}
 $("ofields").addEventListener("input",sumSizes);
-function openOrder(){$("orderBox").hidden=false;if(!document.querySelector(".crow"))addColor();sumSizes();$("orderBox").scrollIntoView({behavior:"smooth"});}
+function openOrder(){$("orderBox").hidden=false;if(!document.querySelector(".crow"))addColor();sumSizes();}
 function buildMsg(){
 const err=$("oerr");err.textContent="";
 if(!LAST){err.textContent="先に見積を出してください。";return;}
