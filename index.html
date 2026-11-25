@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>クラTマガジン自動見積</title>
-<style>:root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;color-scheme:dark}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}main{max-width:560px;width:auto;margin:0 auto;padding:20px 16px 40px}h1{font-size:1.35rem;margin:0 0 4px}.lead{color:var(--sub);font-size:.9rem;margin:0 0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 6px}label:first-child{margin-top:0}.hint{font-weight:400;color:var(--sub);font-size:.8rem}input,select,textarea{width:100%;min-width:0;max-width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}input[type=checkbox]{width:auto;margin-right:8px}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.result{border:2px solid var(--acc);background:var(--accsoft)}.total{font-size:2.1rem;font-weight:800;color:var(--acc);margin:0;line-height:1.2}.per{color:var(--sub);margin:0 0 10px;font-size:.92rem}table{width:100%;border-collapse:collapse;font-size:.9rem}td{padding:6px 0;border-top:1px solid var(--line)}td:last-child{text-align:right;white-space:nowrap}.msg{color:var(--warn);font-weight:700;margin:0}.warn{color:#d92d20;font-weight:700;font-size:.9rem;margin:10px 0}.btn{display:block;text-align:center;background:#06c755;color:#fff;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;margin-top:14px}textarea{min-height:76px;resize:vertical}.blue{background:#1f4fd8;border:0;width:100%;font:inherit;font-weight:700;cursor:pointer}.sizes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.sizes input{padding:8px 6px;text-align:center}.sizes .hint{text-align:center}.sec{font-size:1rem;margin:22px 0 4px;padding-top:12px;border-top:1px solid var(--line)}.opts{display:flex;flex-wrap:wrap;gap:2px 14px}.opts label{font-weight:400;margin:2px 0;display:inline-flex;align-items:center}label.opts{font-weight:400;display:flex;align-items:center;margin:10px 0}input[type=radio]{width:auto;margin-right:6px}details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}summary{font-weight:700;cursor:pointer}.add{background:none;border:1px dashed var(--acc);color:var(--acc);border-radius:10px;padding:8px 12px;margin-top:8px;font:inherit;cursor:pointer}.crow{margin-bottom:10px}.note{color:var(--sub);font-size:.78rem;margin:8px 0 0}.pl{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0}.pl svg{flex:0 0 56px;width:56px;height:56px}.pl .ttl{font-weight:700;font-size:.92rem;margin-bottom:4px}.sh{fill:var(--bg);stroke:var(--sub);stroke-width:1.5}.nk{fill:none;stroke:var(--sub);stroke-width:1.5}.hl{fill:var(--acc);opacity:.5}.chips{display:flex;flex-wrap:wrap;gap:6px}label.chip{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:50px;margin:0;padding:6px 8px;border:1px solid var(--line);border-radius:10px;font-weight:400;font-size:.82rem;cursor:pointer;background:var(--bg)}label.chip input{position:absolute;opacity:0;pointer-events:none}label.chip:has(input:checked){border-color:var(--acc);background:var(--accsoft);font-weight:700}label.chip:has(input:focus-visible){outline:2px solid var(--acc)}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin:0 1px;border:1px solid var(--line)}.dot.full{background:conic-gradient(#e5484d,#f5a623,#12a150,#1f4fd8,#a855f7,#e5484d)}.dots{min-height:14px;line-height:1}.tbl{width:100%;table-layout:fixed;font-size:.72rem}.tbl th,.tbl td{padding:7px 1px;border:1px solid var(--line);text-align:center}.tbl th{background:var(--accsoft);text-align:center}.tbl td:first-child{text-align:center;font-weight:700}.tbl th:first-child{width:25%}.tbl tr.on td{background:rgba(229,72,120,.16);font-weight:700}.tbl td.pick{outline:2px solid var(--acc);outline-offset:-2px}.sel{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:.85rem}.sel text{fill:var(--ink);font-weight:700;text-anchor:middle}.gh{text-align:left;font-size:.78rem;color:var(--sub);padding:8px 0 2px;border-top:1px solid var(--line)}.row.sm{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.sm input{padding:6px 8px;font-size:15px}.sm .hint{font-size:.7rem;line-height:1.3}#tblBox{display:none!important}</style>
+<style>:root{--bg:#f6f8fc;--card:#fff;--ink:#14213d;--sub:#5b6785;--line:#d9e0ee;--acc:#1f4fd8;--accsoft:#e6edff;--warn:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}@media (prefers-color-scheme:dark){:root{--bg:#0f1524;--card:#192138;--ink:#eef2ff;--sub:#9aa7c7;--line:#2c3757;--acc:#7da2ff;--accsoft:#223059;--warn:#ff8a80;color-scheme:dark}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.6}main{max-width:560px;width:auto;margin:0 auto;padding:20px 16px 40px}h1{font-size:1.35rem;margin:0 0 4px}.lead{color:var(--sub);font-size:.9rem;margin:0 0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 6px}label:first-child{margin-top:0}.hint{font-weight:400;color:var(--sub);font-size:.8rem}input,select,textarea{width:100%;min-width:0;max-width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}input[type=checkbox]{width:auto;margin-right:8px}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.result{border:2px solid var(--acc);background:var(--accsoft)}.total{font-size:2.1rem;font-weight:800;color:var(--acc);margin:0;line-height:1.2}.per{color:var(--sub);margin:0 0 10px;font-size:.92rem}table{width:100%;border-collapse:collapse;font-size:.9rem}td{padding:6px 0;border-top:1px solid var(--line)}td:last-child{text-align:right;white-space:nowrap}.msg{color:var(--warn);font-weight:700;margin:0}.warn{color:#d92d20;font-weight:700;font-size:.9rem;margin:10px 0}.btn{display:block;text-align:center;background:#06c755;color:#fff;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;margin-top:14px}textarea{min-height:76px;resize:vertical}.blue{background:#1f4fd8;border:0;width:100%;font:inherit;font-weight:700;cursor:pointer}.sizes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.sizes input{padding:8px 6px;text-align:center}.sizes .hint{text-align:center}.sec{font-size:1rem;margin:22px 0 4px;padding-top:12px;border-top:1px solid var(--line)}.opts{display:flex;flex-wrap:wrap;gap:2px 14px}.opts label{font-weight:400;margin:2px 0;display:inline-flex;align-items:center}label.opts{font-weight:400;display:flex;align-items:center;margin:10px 0}input[type=radio]{width:auto;margin-right:6px}details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}summary{font-weight:700;cursor:pointer}.add{background:none;border:1px dashed var(--acc);color:var(--acc);border-radius:10px;padding:8px 12px;margin-top:8px;font:inherit;cursor:pointer}.crow{margin-bottom:10px}.note{color:var(--sub);font-size:.78rem;margin:8px 0 0}.shp{fill:var(--bg);stroke:var(--sub);stroke-width:1.5}.nk{fill:none;stroke:var(--sub);stroke-width:1.5}.hl{fill:var(--acc);opacity:.5}.chips{display:flex;flex-wrap:wrap;gap:6px}label.chip{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:50px;margin:0;padding:6px 8px;border:1px solid var(--line);border-radius:10px;font-weight:400;font-size:.82rem;cursor:pointer;background:var(--bg)}label.chip input{position:absolute;opacity:0;pointer-events:none}label.chip:has(input:checked){border-color:var(--acc);background:var(--accsoft);font-weight:700}label.chip:has(input:focus-visible){outline:2px solid var(--acc)}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin:0 1px;border:1px solid var(--line)}.dot.full{background:conic-gradient(#e5484d,#f5a623,#12a150,#1f4fd8,#a855f7,#e5484d)}.dots{min-height:14px;line-height:1}.tbl{width:100%;table-layout:fixed;font-size:.72rem}.tbl th,.tbl td{padding:7px 1px;border:1px solid var(--line);text-align:center}.tbl th{background:var(--accsoft);text-align:center}.tbl td:first-child{text-align:center;font-weight:700}.tbl th:first-child{width:25%}.tbl tr.on td{background:rgba(229,72,120,.16);font-weight:700}.tbl td.pick{outline:2px solid var(--acc);outline-offset:-2px}.sel{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:.85rem}.sel text{fill:var(--ink);font-weight:700;text-anchor:middle}.gh{text-align:left;font-size:.78rem;color:var(--sub);padding:8px 0 2px;border-top:1px solid var(--line)}.row.sm{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.sm input{padding:6px 8px;font-size:15px}.sm .hint{font-size:.7rem;line-height:1.3}#tblBox{display:none!important}
+.pd{padding:0 12px;margin:8px 0;border-radius:12px}.pd>summary{display:flex;align-items:center;gap:12px;min-height:60px;list-style:none;padding:6px 0}.pd>summary::-webkit-details-marker{display:none}.pd>summary:after{content:"▾";color:var(--sub);font-size:1.1rem}.pd[open]>summary:after{content:"▴"}.pd svg{flex:0 0 52px;width:52px;height:52px}.pd .ttl{font-weight:700;font-size:.95rem;flex:1}.ps{font-size:.8rem;color:var(--sub);text-align:right}.ps.on{color:var(--acc);font-weight:700}.pb{padding:2px 0 12px}
+.dd{background:var(--card);margin:12px 0}.df{margin:0 0 8px 26px}.df label{margin:6px 0 4px}
+</style>
 </head>
 <body>
 <main>
@@ -19,24 +22,12 @@
 <div id="qnote"></div>
 <div id="dyn"></div>
 </div>
-<div class="card result" id="out" aria-live="polite"></div>
-<div class="card" id="tblBox" hidden><h2 style="font-size:1.05rem;margin:0 0 4px">料金表（無地込みの1枚の金額）</h2><p class="note" id="tblNote" style="margin:0 0 8px"></p><table class="tbl" id="tbl"></table><p class="note">ピンクの行が、入力した枚数の料金帯です。10〜19枚は新設の料金帯です。</p></div>
-<div class="card" id="orderBox" hidden>
-<h2 style="font-size:1.1rem;margin:0 0 4px">ご注文内容の入力（注文用紙）</h2>
-<p class="note" style="margin:0 0 6px">注文用紙と同じ項目です。入力してLINEで送れば、用紙の記入・写真は不要です。超早割・早割は見積のチェックで反映済み。みんな割などの特典は、スタッフが確認して適用します。</p>
-<div id="osum" class="note" style="margin-bottom:6px"></div>
-<div id="ofields"></div>
-<p class="note" style="margin-top:14px">★オーダーメイド商品につき、デザイン確定後の変更や商品到着後のデザイン変更等、お客様のご都合による返品・交換はご遠慮ください。<br>★お申込み後の商品／カラー／サイズ枚数の変更、およびキャンセルは原則できませんのでご注意ください。</p>
-<p class="msg" id="oerr" style="margin:10px 0"></p>
-<button class="btn blue" onclick="sendOrder()">LINEで注文内容を送る</button>
-<button type="button" class="add" style="width:100%" onclick="copyOrder()">LINEが開かない場合：内容をコピーする</button>
-<p class="note" id="cmsg"></p>
-<textarea id="cbox" hidden readonly></textarea>
-<p class="note">LINEが開き、内容が入力された状態になります。送信ボタンを押すと注文の申し込みが届きます。</p>
-<h3 style="font-size:1rem;margin:18px 0 4px;padding-top:14px;border-top:1px solid var(--line)">続けて、デザインをお送りください</h3>
-<p class="note" style="margin:0">LINEに画像を直接送ると、画質が下がったり背景に色がついたりすることがあります。専用ページなら、元の画質のまま届きます。画質チェック・背景を透明にする機能もあります。</p>
-<a id="dsn" class="btn" style="background:var(--card);color:var(--acc);border:2px solid var(--acc)" target="_blank" rel="noopener">デザインを送る</a>
+<div class="card result">
+<div id="o1" aria-live="polite"></div>
+<details class="dd" id="ddw" hidden><summary id="dds">割引を使う</summary><div id="ew" style="margin-top:6px"></div><div id="dsc"></div></details>
+<div id="o2"></div>
 </div>
+<div class="card" id="tblBox" hidden><h2 style="font-size:1.05rem;margin:0 0 4px">料金表（無地込みの1枚の金額）</h2><p class="note" id="tblNote" style="margin:0 0 8px"></p><table class="tbl" id="tbl"></table><p class="note">ピンクの行が、入力した枚数の料金帯です。10〜19枚は新設の料金帯です。</p></div>
 <p class="note">※ 表示は概算です。掲載の枚数帯以外はお問い合わせください。</p>
 </main>
 <script>
@@ -80,9 +71,12 @@ S("ハッピ",2000,"F",["F"]),
 {"n":"スポーツシャツ","t":"opt","opts":["背ネームor背番号","背ネーム・背番号"],"tiers":[[1,99,[2500,3000]]],"note":"1〜99枚の料金です。100枚以上はお問い合わせください。","sz":"S～2XL","szl":["S","M","L","LL","3L"]}
 ];
 const WARN='<p class="warn">【ご注意】26枚以上のご注文は、1枚分が無料になります。ご入力の枚数は、無料分を含めた「お手元に届けたい枚数」です。（例：26枚と入力 → お支払いは25枚分）</p>';
-const DESIGN_URL="https://clat-m.github.io/index/design.html";const SHEET_URL="https://clat-m.github.io/index/sheet.html";
+const ORDER_URL="https://clat-m.github.io/index/order.html";
 const LINE_ID="@clat-m";
-let LAST=null,WHEN=0;
+let LAST=null,WHEN=0,eW=0;
+const DK=[["m","みんな割"],["r","リピ割"],["t","#タグ付け割"],["e","アンケート割"],["a","メディアぷらす"]];
+const DSC={};
+const COND={t:"Instagramで「#クラTマガジン」をタグ付けして、思い出の動画・写真を投稿し、アカウントをフォローしてください。合計金額1万円以上で500円引きです。",e:"簡単なアンケート（約3分）に答えてください。合計金額1万円以上で500円引きです。",a:"着用した写真または動画を、商品到着から1週間以内に送ってください（1枚分無料）。お送りいただいた写真・動画は、カタログ・HP・SNS等で使用させていただく場合があります。ご了承ください。"};
 const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const NMF={n:700,z:700,nz:1300},NMS={n:600,z:600};
@@ -91,7 +85,7 @@ const INK=["#e5484d","#1f4fd8","#f5a623","#12a150"];
 const dots=v=>v==="F"?'<i class="dot full"></i>':Array.from({length:+v},(_,i)=>'<i class="dot" style="background:' + INK[i]+ '"></i>').join("");
 const R='<rect class="hl" x="23" y="24" width="18" height="18" rx="2"/>';
 const HL={front:R,back:R,sr:'<polygon class="hl" points="8,16 13,26 19,23 20,10"/>',sl:'<polygon class="hl" points="56,16 51,26 45,23 44,10"/>'};
-const SHP='<path class="sh" d="M20 8 L8 16 L13 26 L19 23 L19 56 L45 56 L45 23 L51 26 L56 16 L44 8 Z"/>';
+const SHP='<path class="shp" d="M20 8 L8 16 L13 26 L19 23 L19 56 L45 56 L45 23 L51 26 L56 16 L44 8 Z"/>';
 const shirt=k=>'<svg viewBox="0 0 64 64" aria-hidden="true">' + SHP + HL[k]+ '<path class="nk" d="' +(k==="back"?"M25 8 Q32 12 39 8":"M25 8 Q32 18 39 8")+ '"/></svg>';
 const PLACES=[["pf","nf","前（むね側）","front",["0","1","2","3","4","F"],"1"],["pb","nb","背中","back",["0","1","2","3","4","F"],"0"],["pr","nr","右袖","sr",["0","1","2","3","F"],"0"],["pl","nl","左袖","sl",["0","1","2","3","F"],"0"]];
 const nmChips=q=>q[3]==="front"||q[3]==="back"?[["0","なし",""],["n","ネーム","+700円"],["z","ゼッケン","+700円"],["nz","ネーム＋ゼッケン","+1,300円"]]:[["0","なし",""],["n","ネーム","ワンポイント +600円"],["z","ゼッケン","ワンポイント +600円"]];
@@ -103,12 +97,12 @@ if(n!=="0"&&n!=="n")g +='<text x="32" y="48" font-size="13">10</text>';
 [[back?l:r,10],[back?r:l,54]].forEach(a=>{if(a[0]!=="0")g +='<circle cx="' + a[1]+ '" cy="19" r="3" fill="' +(a[0]==="F"?"url(#rg)":INK[0])+ '"/>';});
 return '<svg viewBox="0 0 64 64" width="72" height="72"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5484d"/><stop offset=".35" stop-color="#f5a623"/><stop offset=".65" stop-color="#12a150"/><stop offset="1" stop-color="#1f4fd8"/></linearGradient></defs>' + SHP + g + '</svg>';
 };
-const printUI=()=>'<label>プリントする場所と色数</label><p class="note" style="margin:0 0 6px">場所ごとに、インクの色の数を選んでください。合計の色数で料金が決まります。ネーム・ゼッケンは色数に含みません。</p>' +
-PLACES.map(q=>'<div class="pl">' + shirt(q[3])+ '<div style="flex:1"><div class="ttl">' + q[2]+ '</div><div class="chips">' +
+const printUI=()=>'<label>プリントする場所と色数 <span class="hint">場所をタップすると開きます</span></label><p class="note" style="margin:0 0 6px">場所ごとに、インクの色の数を選んでください。合計の色数で料金が決まります。ネーム・ゼッケンは色数に含みません。</p>' +
+PLACES.map((q,i)=>'<details class="pd"><summary>' + shirt(q[3])+ '<span class="ttl">' + q[2]+ '</span><span class="ps" id="ps' + i + '"></span></summary><div class="pb"><div class="chips">' +
 q[4].map(v=>chip(q[0],v,'<span class="dots">' +(v==="0"?"":dots(v))+ '</span><span>' +(v==="0"?"なし":v==="F"?"フルカラー":v + "色")+ '</span>',v===q[5])).join("")+ '</div>' +
 '<div class="hint" style="margin:10px 0 4px">ネーム・ゼッケン</div><div class="chips">' +
 nmChips(q).map((o,i)=>chip(q[1],o[0],'<span>' + o[1]+ '</span>' +(o[2]?'<span class="hint" style="font-size:.68rem">' + o[2]+ '</span>':''),i===0)).join("")+ '</div>' +
-'</div></div>').join("")+
+'</div></details>').join("")+
 '<p class="note" id="psum" style="font-weight:700"></p>' +
 '<details><summary>色数の数え方</summary><p class="note">・色数＝プリントに使うインクの色の数です。黒い文字＋赤いロゴなら2色です。<br>・同じ面（前・背中）は、横30cm×縦38cm以内なら、同じ色は何か所でも1色です。<br>・袖は片袖ずつで数えます。前・背中・袖の色は合計します。<br>・フルカラー＝写真やグラデーションなど、色数を数えられないデザイン。複数の場所に選べます。<br>・ネーム・ゼッケンは色数に含みません。<br>・5色以上は、1色増えるごとに「2色目から」の金額が加算されます。<br>・例：前に白文字＋黄色ロゴ、背中に白文字 → 合計3色分</p></details>';
 const $=id=>document.getElementById(id);
@@ -116,6 +110,24 @@ const yen=n=>"¥" + Math.round(n).toLocaleString("ja-JP");
 const num=id=>$(id)?Math.max(0,parseInt($(id).value,10)||0):0;
 DATA.forEach(p=>{if(p.all)p.tiers.unshift([10,19,p.tiers[0][2].map(x=>x + 600)]);});
 DATA.forEach((p,i)=>$("prod").add(new Option(p.n,i)));
+const dscHtml=o=>DK.map(d=>{const k=d[0],n=d[1].replace("#","");
+let x='<label class="opts"><input type="checkbox" data-d="' + k + '">' + n + '</label><div class="df" data-f="' + k + '" hidden>';
+if(k==="m")x +='<p class="note" style="margin:0">お届け希望日の14日以上前に、他のクラスと同時に注文する場合の割引です（2クラス20円／3クラス30円／4クラス40円／5クラス以上50円、いずれも1枚あたり）。1クラス1万円以上が条件です。</p><label>同時に注文するクラス数</label><input type="number" inputmode="numeric" min="2" data-d="mv" placeholder="例：3">' +(o?'<label>同時に注文するクラス（学年・組）</label><input type="text" data-d="mn" placeholder="例：2-1、2-2、2-3">':'');
+else if(k==="r")x +='<p class="note" style="margin:0">前回注文したクラス限定です（前回と異なるデザインのみ・合計金額1万円以上で500円引き）。</p><label>前回の注文番号 または 注文時期</label><input type="text" data-d="rv" placeholder="例：2025年10月">';
+else x +='<p class="note" style="margin:0">' + COND[k]+ '</p>' +(k==="e"?'<a href="https://clat-m.com/question" target="_blank" rel="noopener" style="color:var(--acc)">アンケートはこちら</a>':k==="t"?'<a href="https://www.instagram.com/clat_magazine" target="_blank" rel="noopener" style="color:var(--acc)">Instagramを開く</a>':'')+ '<label class="opts ack"><input type="checkbox" data-d="' + k + 'k">条件を確認し、了承しました</label>';
+return x + '</div>';}).join("");
+function syncD(skip){
+document.querySelectorAll("[data-d]").forEach(e=>{if(e===skip)return;const k=e.dataset.d;
+if(k==="w80"||k==="w50")e.checked=WHEN===+k.slice(1);
+else if(e.type==="checkbox")e.checked=!!DSC[k];
+else e.value=DSC[k]||"";});
+document.querySelectorAll("[data-f]").forEach(e=>{e.hidden=!DSC[e.dataset.f];});
+const n=DK.filter(d=>DSC[d[0]]).length +(WHEN?1:0);
+$("dds").textContent="割引を使う" +(n?"（" + n + "件選択中）":"");
+}
+document.addEventListener("input",e=>{const t=e.target,k=t.dataset&&t.dataset.d;if(!k)return;
+if(k==="w80"||k==="w50")WHEN=t.checked?+k.slice(1):0;else DSC[k]=t.type==="checkbox"?(t.checked?1:0):t.value;
+syncD(t);calc();});
 function buildForm(){
 const p=DATA[$("prod").value];
 $("plainNote").textContent=(p.t==="std"?"無地価格：" + p.plain.toLocaleString("ja-JP")+ "円　":"")+(p.sz?"取り扱いサイズ：" + p.sz:"");
@@ -134,7 +146,6 @@ if(p.all)h +='<p class="note">1枚でも背ネーム・背番号が入る場合�
 if(p.note)h +='<p class="note">' + p.note + '</p>';
 }
 $("dyn").innerHTML=h;
-if($("colors")){$("colors").innerHTML="";if(!$("orderBox").hidden)addColor();}
 if(p.all)[1,2,3].forEach(i=>{const e=$("o" + i);e.dataset.v=0;e.addEventListener("input",()=>{const n=num("o" + i),d=n -(+e.dataset.v);e.dataset.v=n;if(d)$("qty").value=num("qty")+ d;});});
 $("dyn").querySelectorAll("input,select").forEach(e=>e.addEventListener("input",calc));
 calc();
@@ -155,11 +166,14 @@ h +='<td' +(x===t&&full?' class="pick"':'')+ '>+' + x[3].toLocaleString("ja-JP")
 $("tbl").innerHTML=h;
 $("tblNote").textContent=t?"プリント料金（" + t[0]+ "〜" + t[1]+ "枚）：1色目 +" +(t[2][0]- p.plain).toLocaleString("ja-JP")+ "円、2色目から1色ごと +" +(t[2][1]- t[2][0]).toLocaleString("ja-JP")+ "円（5色以上も同じ）。前・背中・袖の色を合計して数えます。":"";
 }
-function setW(v,e){WHEN=e.checked?v:0;calc();}
+const upPs=()=>PLACES.forEach((q,i)=>{const e=$("ps" + i);if(!e)return;const c=pv(q[0]),m=pv(q[1]);e.textContent=(c==="0"?"なし":c==="F"?"フルカラー":c + "色")+(m!=="0"?"＋" + NMLAB[m]:"");e.className="ps" +(c!=="0"||m!=="0"?" on":"");});
+const stEnc=()=>{const p=DATA[$("prod").value];return enc({p:+$("prod").value,q:num("qty"),v:["pf","pb","pr","pl","nf","nb","nr","nl"].map(pv),x:(p.xs||[]).map((_,i)=>num("x" + i)),s:$("sur")&&$("sur").checked?1:0,o:[1,2,3].map(i=>num("o" + i)),a:$("allname")&&$("allname").checked?1:0,w:WHEN,d:DSC});};
 function calc(){
-const p=DATA[$("prod").value],qty=num("qty"),out=$("out");
+const p=DATA[$("prod").value],qty=num("qty"),out=$("o1"),o2=$("o2");
+LAST=null;eW=0;o2.innerHTML="";$("ddw").hidden=true;
 const allN=!!(p.all&&$("allname")&&$("allname").checked);
 const tot=qty;
+if(p.t==="std")upPs();
 $("qnote").innerHTML=(tot>=26?"":'<p class="hint">26枚以上のご注文で、1枚分が無料になります。</p>');
 const t=p.tiers.find(x=>tot>=x[0]&&tot<=x[1]);
 drawTbl(p,t);
@@ -167,9 +181,13 @@ if(!t){
 out.innerHTML='<p class="msg">この枚数の場合はお問い合わせください。</p>';
 return;
 }
-let rows=[],freeV=0,selHtml="";
+$("ddw").hidden=false;$("ew").hidden=p.t!=="std";
+$("ew").innerHTML=p.t==="std"?'<label class="opts"><input type="checkbox" data-d="w80">超早割（納期の20日前まで）-80円/枚</label><label class="opts"><input type="checkbox" data-d="w50">早割（納期の14日前まで）-50円/枚</label><div class="hint" style="margin:0 0 6px 26px">超早割と早割は、どちらか一方です。</div>':"";
+if(!$("dsc").firstChild)$("dsc").innerHTML=dscHtml(0);
+syncD();
+let rows=[],freeV=0,selHtml="",dmsg=[],mp=0;
 if(p.t==="std"){
-const disc=WHEN,cs=cstate(),fullN=cs.fullN,cols=cs.cols;
+let disc=WHEN;const cs=cstate(),fullN=cs.fullN,cols=cs.cols;
 const sur=$("sur")&&$("sur").checked?p.sur[1]:0;
 const nms=[];
 PLACES.forEach(q=>{
@@ -183,6 +201,10 @@ const xs=(p.xs||[]).map((x,i)=>({lab:x[0],fee:x[1],kind:x[2],n:num("x" + i)}));
 const sizeSum=xs.filter(x=>x.kind==="s").reduce((a,x)=>a + x.n,0);
 if(sizeSum>qty||xs.some(x=>x.n>qty)||nms.some(x=>x.n>qty)){out.innerHTML='<p class="msg">オプションの枚数が注文枚数を超えています。</p>';return;}
 const base=p.plain + fullN*t[3]+(cols?t[2][0]- p.plain +(cols - 1)*(t[2][1]- t[2][0]):0);
+const gross=base*qty + sur*qty + xs.reduce((a,x)=>a + x.n*x.fee,0)+ nms.reduce((a,x)=>a + x.n*x.fee,0);
+if(disc&&gross<10000){dmsg.push("超早割・早割は、合計金額1万円以上が条件のため適用されません。");disc=0;}
+if(DSC.m){const c=+DSC.mv||0;if(c<2)dmsg.push("みんな割：同時に注文するクラス数（2以上）を入力してください。");else if(gross<10000)dmsg.push("みんな割は、1クラス1万円以上が条件のため適用されません。");else mp=10*Math.min(5,c);}
+eW=disc;
 const say=PLACES.map((q,i)=>{const c=cs.v[i],m=pv(q[1]),a=[];if(c!=="0")a.push(c==="F"?"フルカラー":c + "色プリント");if(m!=="0")a.push(NMLAB[m]);return a.length?q[2].replace("（むね側）","")+ "：" + a.join("＋"):"";}).filter(Boolean).join("／");
 selHtml='<div class="sel"><div style="display:flex">' + mini(cs.v[0],pv("nf"),0,cs.v[2],cs.v[3])+ mini(cs.v[1],pv("nb"),1,cs.v[2],cs.v[3])+ '</div><div><b>選んだ内容</b><br>' + say +(nms.length?'<br><span class="hint">※ネーム・ゼッケンは色数に含みません</span>':'')+ '</div></div>';
 const parts=[];if(cols)parts.push("色数" + cols + "色分");if(fullN)parts.push("フルカラー" + fullN + "か所");
@@ -190,6 +212,7 @@ const placeTxt=PLACES.map((q,i)=>cs.v[i]==="0"?"":q[2].replace("（むね側）"
 rows.push([(placeTxt?placeTxt + "（" + parts.join("＋")+ "）":"プリントなし")+ "（" + qty + "枚 × " + yen(base)+ "）",base*qty,0]);
 if(sur)rows.push([p.sur[0]+ "（" + qty + "枚）",sur*qty,0]);
 if(disc)rows.push([(disc===50?"早割":"超早割")+ "（" + qty + "枚 × -" + disc + "円）",-disc*qty,2]);
+if(mp)rows.push(["みんな割（" + qty + "枚 × -" + mp + "円）",-mp*qty,2]);
 xs.forEach(x=>{if(x.n)rows.push([x.lab + "（" + x.n + "枚）",x.n*x.fee,2]);});
 nms.forEach(x=>{if(x.n)rows.push([x.lab + "（" + x.n + "枚 × " + yen(x.fee)+ "）",x.n*x.fee,1]);});
 let forced=0;const singles=[];
@@ -197,7 +220,7 @@ const sg=xs.filter(x=>x.kind==="s"&&x.n);
 if(sg.length&&sizeSum===qty)forced +=Math.min.apply(null,sg.map(x=>x.fee));else sg.forEach(x=>singles.push(x.fee));
 xs.filter(x=>x.kind==="c"&&x.n).forEach(x=>{if(x.n===qty)forced +=x.fee;else singles.push(x.fee);});
 nms.filter(x=>x.n).forEach(x=>{if(x.n===qty)forced +=x.fee;else singles.push(x.fee);});
-freeV=base - disc + sur + forced + Math.max.apply(null,[0].concat(singles));
+freeV=base - disc - mp + sur + forced + Math.max.apply(null,[0].concat(singles));
 }else{
 let rest=qty,cnt=[];
 for(let i=1;i<p.opts.length;i++){
@@ -212,98 +235,26 @@ p.opts.forEach((o,i)=>{if(cnt[i])rows.push([lab[i]+ "（" + cnt[i]+ "枚 × " + 
 freeV=Math.max(0,...prc.filter((x,i)=>cnt[i]>0));
 }
 if(tot>=26&&freeV>0)rows.push(["26枚以上のご注文：1枚分無料（最も高い1枚）",-freeV,p.t==="std"?2:void 0]);
+const sub0=rows.reduce((s,r)=>s + r[1],0);
+[["t","タグ付け割"],["e","アンケート割"],["r","リピ割"]].forEach(a=>{if(!DSC[a[0]])return;if(sub0>=10000)rows.push([a[1]+ "（合計から）",-500,p.t==="std"?2:void 0]);else dmsg.push(a[1]+ "は、合計金額1万円以上が条件のため適用されません。");});
+if(p.t!=="std"&&DSC.m)dmsg.push("みんな割は、ふるプリ・無地・タオルは対象外です。");
 const total=rows.reduce((s,r)=>s + r[1],0);
-LAST={pn:p.n,sz:p.szl,q:tot,r:rows,t:total,w:p.t==="std"?String(WHEN):"0",pl:rows.filter(r=>r[1]>0).map(r=>r[0]).join(" / ")};
-$("osum").innerHTML="見積：" + esc(p.n)+ "／" + tot + "枚／概算 " + yen(total)+ "（税込）";
+LAST={pn:p.n,sz:p.szl,q:tot,r:rows,t:total,w:String(eW),pl:rows.filter(r=>r[1]>0).map(r=>r[0]).join(" / ")};
 const msg="【クラTマガジン】見積の問い合わせ\n商品：" + p.n + "\n枚数：" + tot + "枚\n" +
 rows.map(r=>"・" + r[0]+ "：" +(r[1]<0?"-":"")+ yen(Math.abs(r[1]))).join("\n")+
 "\n概算合計（税込）：" + yen(total)+ "\n※自動見積の概算です。";
-const chk=(v,t)=>'<label class="opts"><input type="checkbox"' +(WHEN===v?" checked":"")+ ' onchange="setW(' + v + ',this)">' + t + '</label>';
-const wBox=p.t==="std"?chk(80,"超早割（納期の20日前まで）-80円/枚")+ chk(50,"早割（納期の14日前まで）-50円/枚"):"";
 const tr=r=>'<tr><td>' + r[0]+ '</td><td>' +(r[1]<0?"-":"")+ yen(Math.abs(r[1]))+ '</td></tr>';
-const orderBtn='<button class="btn blue" onclick="openOrder()">この内容で注文する</button>';
+const orderBtn='<a class="btn blue" target="_blank" rel="noopener" href="' + ORDER_URL + '#e=' + stEnc()+ '">この内容で注文する</a>';
 const lineBtn='<a class="btn" target="_blank" rel="noopener" href="https://line.me/R/oaMessage/' + encodeURIComponent(LINE_ID)+ '/?' + encodeURIComponent(msg)+ '">この内容で問い合わせる（LINE）</a>' +
 '<p class="note">LINEが開き、見積内容が入力された状態になります。送信ボタンを押すと送られます。</p>';
-out.innerHTML='<p class="total">' + yen(total)+ '</p><p class="per">税込 ／ 1枚あたり平均 ' + yen(total / tot)+ '</p>' + selHtml + wBox +(tot>=26?WARN:'')+
-'<table>' +(p.t==="std"?[0,1,2].map(g=>{const a=rows.filter(r=>r[2]===g);return a.length?'<tr><th colspan="2" class="gh">' +["プリント代（色数で決まる料金）","ネーム・ゼッケン代（色数とは別料金）","サイズ加算・割引など"][g]+ '</th></tr>' + a.map(tr).join(""):"";}).join(""):rows.map(tr).join(""))+ '</table><p class="note">通常インクの場合の金額になります。特殊インクをご使用の場合は別途料金がかかります。</p>' + orderBtn + lineBtn;
-}
-const SL={SS:"XS(SS)",LL:"XL(LL)","3L":"XXL(3L)","4L":"XXXL(4L)","5L":"4XL(5L)","6L":"5XL(6L)","7L":"6XL(7L)"},sl=z=>SL[z]||z;
-const val=x=>Array.isArray(x)?x.join("、"):x===true?"はい":(x||"");
-const fmtD=s=>s?new Date(s + "T00:00:00").toLocaleDateString("ja-JP",{month:"long",day:"numeric",weekday:"short"}):"";
-const SEC=[
-["ご希望日",[["want","お届け希望日","date"],["asap","出来上がり次第お届けしてOK","chk"],["use","ご使用日","date"],["evt","ご使用イベント","r",["学園祭","球技大会","部活・サークル","体育祭","その他"]],["evtx","「その他」の内容","text"]]],
-["学校・団体",[["school","学校名","text",,1],["schoolk","学校名（フリガナ）","text"],["cls","クラス・団体名","text"],["clsk","クラス・団体名（フリガナ）","text"],["stel","学校TEL","tel"],["sfax","学校FAX","tel"]]],
-["代表者",[["rep","代表者名","text",,1],["repk","代表者名（フリガナ）","text"],["rept","代表者は","r",["生徒","先生"]],["mob","携帯番号","tel",,1],["tutor","ご担任のお名前","text"]]],
-["お届け先",[["ztype","お届け先の種類","r",["学校","自宅","友人宅"]],["zip","郵便番号","text"],["addr","住所","textarea"],["rname","お名前","text"],["rtel","電話番号","tel"]]],
-["学割特典",[["disc","利用する特典","c",["みんな割","リピ割","#タグ付け割","アンケート割","メディアぷらす"]],["minna","みんな割：同時に申し込むクラス（学年・組）","text"],["rpt","リピ割：前回の注文番号","text"]]],
-["サイズ・商品カラー",null,"colors"],
-["プリント位置・サイズ",null,"pos"],
-["その他",[["budget","ご希望制作予算（1枚あたり・円）","text"],["memo","その他ご要望","textarea"]]]
-];
-const PN="おまかせ：最大 縦38×横30cm くらい（ワンポイント：縦10×横10cm）";
-const POS=[["front","前面",PN],["back","背面",PN],["sleeve","袖","おまかせ：最大 縦8×横8cm くらい"],["other","その他",""]];
-const LBL={},FLD=[];
-SEC.forEach(s=>{if(s[1])s[1].forEach(f=>{LBL[f[0]]=f[1];FLD.push(f);});});
-POS.forEach(p=>{
-const base=[["size","サイズ","r",["おまかせ","指定"]],["h","縦（cm）くらい","text"],["w","横（cm）くらい","text"],["ink","インクカラー","text"],["font","フォント番号","text"],["samp","デザインサンプル番号","text"]];
-(p[0]==="sleeve"?[["side","位置","r",["右袖","左袖","両袖"]]]:[]).concat(base).forEach(a=>{const id="p_" + p[0]+ "_" + a[0];LBL[id]=p[1]+ "・" + a[1];FLD.push([id,a[1],a[2],a[3]]);});
-});
-const fHtml=f=>{const id=f[0],lb=f[1],ty=f[2],op=f[3],L=lb +(f[4]?' <span class="hint">必須</span>':'');
-if(ty==="r"||ty==="c")return '<label>' + L + '</label><div class="opts">' + op.map(o=>'<label><input type="' +(ty==="r"?"radio":"checkbox")+ '" name="' + id + '" value="' + esc(o)+ '">' + esc(o)+ '</label>').join("")+ '</div>';
-if(ty==="chk")return '<label class="opts"><input type="checkbox" id="' + id + '">' + lb + '</label>';
-if(ty==="textarea")return '<label for="' + id + '">' + L + '</label><textarea id="' + id + '"></textarea>';
-return '<label for="' + id + '">' + L + '</label><input id="' + id + '" type="' + ty + '">';};
-const getV=f=>{const id=f[0],ty=f[2];
-if(ty==="r"){const e=document.querySelector('input[name="' + id + '"]:checked');return e?e.value:"";}
-if(ty==="c")return[].slice.call(document.querySelectorAll('input[name="' + id + '"]:checked')).map(e=>e.value);
-if(ty==="chk")return $(id).checked;
-return $(id).value.trim();};
-$("ofields").innerHTML=SEC.map(s=>'<h3 class="sec">' + s[0]+ '</h3>' +(s[1]?s[1].map(fHtml).join(""):
-s[2]==="colors"?'<p class="note">サービス枚数（26枚以上で1枚無料）を含めた、必要なサイズ枚数をすべて記入してください。</p><div id="colors"></div><button type="button" class="add" onclick="addColor()">＋ 色を追加（最大3色）</button><div class="hint" id="ssum" style="margin-top:6px"></div><label class="opts" style="margin-top:12px"><input type="checkbox" id="fix">商品カラー・サイズ・枚数について、以降変更はありません <span class="hint">必須</span></label>':
-POS.map(p=>'<details><summary>' + p[1]+ '</summary>' + FLD.filter(f=>f[0].indexOf("p_" + p[0]+ "_")===0).map((f,i)=>(f[0].slice(-5)==="_size"&&p[2]?'':'')+ fHtml(f)+(f[0].slice(-5)==="_size"&&p[2]?'<p class="note">' + p[2]+ '</p>':'')).join("")+ '</details>').join(""))).join("");
-function addColor(){
-const c=document.querySelectorAll(".crow").length;if(c>=3)return;
-$("colors").insertAdjacentHTML("beforeend",'<div class="crow"><label>商品カラー' +(c + 1)+ '</label><input class="cc" placeholder="例：ブラック"><div class="sizes" style="margin-top:8px">' + DATA[$("prod").value].szl.map(z=>'<div><div class="hint">' + sl(z)+ '</div><input class="cs" data-z="' + z + '" type="number" inputmode="numeric" min="0"></div>').join("")+ '</div></div>');
-}
-const rowsC=()=>[].slice.call(document.querySelectorAll(".crow")).map(r=>{const s={};r.querySelectorAll(".cs").forEach(i=>{const n=parseInt(i.value,10)||0;if(n)s[i.dataset.z]=n;});return{c:r.querySelector(".cc").value.trim(),s:s};});
-const cnt=s=>Object.keys(s).reduce((a,k)=>a + s[k],0);
-function sumSizes(){const sum=rowsC().reduce((a,r)=>a + cnt(r.s),0);$("ssum").textContent="合計 " + sum + "枚 / 注文 " +(LAST?LAST.q:0)+ "枚";return sum;}
-$("ofields").addEventListener("input",sumSizes);
-function openOrder(){$("orderBox").hidden=false;if(!document.querySelector(".crow"))addColor();sumSizes();}
-function buildMsg(){
-const err=$("oerr");err.textContent="";
-if(!LAST){err.textContent="先に見積を出してください。";return;}
-const f={};FLD.forEach(x=>{const v=getV(x);if(Array.isArray(v)?v.length:v)f[x[0]]=v;});
-const miss=FLD.filter(x=>x[4]&&!f[x[0]]).map(x=>x[1]);
-if(miss.length){err.textContent="未入力の必須項目：" + miss.join("、");return;}
-const c=rowsC().filter(r=>cnt(r.s)),sum=sumSizes();
-if(sum!==LAST.q){err.textContent="サイズ別の枚数の合計（" + sum + "枚）を、注文枚数（" + LAST.q + "枚）に合わせてください。";return;}
-if(c.some(r=>!r.c)){err.textContent="枚数を入れた行の商品カラーを入力してください。";return;}
-if(!$("fix").checked){err.textContent="「商品カラー・サイズ・枚数について、以降変更はありません」にチェックしてください。";return;}
-const d={pn:LAST.pn,q:LAST.q,t:LAST.t,r:LAST.r,w:LAST.w,pl:LAST.pl,c:c,f:f,d:new Date().toISOString().slice(0,10)};
-const base=SHEET_URL||location.href.split("#")[0],ok=!/studioiframesandbox/.test(base);
-const cs=c.map(r=>r.c + " " + Object.keys(r.s).map(z=>sl(z)+ ":" + r.s[z]).join(" ")).join(" / ");
-const z={p:d.pn,sz:LAST.sz,q:d.q,t:d.t,w:d.w,d:d.d,c:c.map(r=>[r.c,r.s]),f:{}};
-FLD.forEach((x,i)=>{if(f[x[0]])z.f[i]=f[x[0]];});
-let msg="【クラTマガジン】ご注文\n学校名：" + f.school + "（" +(f.cls||"")+ "）\n代表者：" + f.rep + "　携帯：" + f.mob + "\n商品：" + d.pn + "／" + d.q + "枚　概算：" + yen(d.t)+(d.pl?"\nプリント内容：" + d.pl:"")+
-"\nお届け希望：" +(f.asap?"出来上がり次第OK":(fmtD(f.want)||"未入力"))+ "\nご使用日：" +(fmtD(f.use)||"未入力")+ "\nカラー・サイズ：" + cs;
-const skip=["school","cls","rep","mob","want","use","asap"];
-msg +=(d.w==="80"?"\n注文時期：超早割":d.w==="50"?"\n注文時期：早割":"")+ "\n" + FLD.filter(x=>f[x[0]]&&skip.indexOf(x[0])<0).map(x=>LBL[x[0]]+ "：" + val(f[x[0]])).join("\n")+(ok?"\n\n▼注文書（スタッフ用）\n" + base + "#o=" + enc(z):"");
-return msg;
-}
-function sendOrder(){const m=buildMsg();if(m)window.open("https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID)+ "/?" + encodeURIComponent(m),"_blank");}
-function copyOrder(){
-const m=buildMsg();if(!m)return;
-const box=$("cbox"),say=t=>{$("cmsg").textContent=t;};
-box.hidden=false;box.value=m;
-const done=()=>say("コピーしました。公式LINEのトーク画面に貼り付けて送信してください。");
-const manual=()=>say("下の枠の文章を全選択してコピーし、公式LINEのトーク画面に貼り付けて送信してください。");
-const fb=()=>{box.select();try{document.execCommand("copy")?done():manual();}catch(e){manual();}};
-if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(m).then(done,fb);else fb();
+out.innerHTML='<p class="total">' + yen(total)+ '</p><p class="per">税込 ／ 1枚あたり平均 ' + yen(total / tot)+ '</p>' + selHtml;
+o2.innerHTML=(tot>=26?WARN:'')+
+'<table>' +(p.t==="std"?[0,1,2].map(g=>{const a=rows.filter(r=>r[2]===g);return a.length?'<tr><th colspan="2" class="gh">' +["プリント代（色数で決まる料金）","ネーム・ゼッケン代（色数とは別料金）","サイズ加算・割引など"][g]+ '</th></tr>' + a.map(tr).join(""):"";}).join(""):rows.map(tr).join(""))+ '</table><p class="note">通常インクの場合の金額になります。特殊インクをご使用の場合は別途料金がかかります。</p>' +
+dmsg.map(m=>'<p class="warn" style="font-size:.8rem">' + m + '</p>').join("")+(DSC.a?'<p class="note">メディアぷらす：商品到着後1週間以内に写真・動画を送ると1枚分無料です（スタッフが後ほど適用します）。</p>':'')+ orderBtn + lineBtn;
 }
 $("prod").addEventListener("input",buildForm);
 $("qty").addEventListener("input",calc);
-buildForm();$("dsn").href=DESIGN_URL;
+buildForm();
 </script>
 </body>
 </html>

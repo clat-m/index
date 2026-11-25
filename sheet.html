@@ -16,7 +16,7 @@ body{margin:0;background:#e9ecf2;font-family:"Hiragino Sans","Noto Sans JP","Yu 
 .sub table{width:100%;border-collapse:collapse;margin:8px 0}
 .sub td,.sub th{border:1px solid #888;padding:6px 8px;text-align:left}
 .sub td.r{text-align:right;white-space:nowrap}
-.sub th{background:#eee;width:30%}
+.sub th{background:#eee;width:30%}.ax{table-layout:fixed}.ax th,.ax td{padding:4px 1px!important;text-align:center!important;font-size:10px;width:auto!important;word-break:break-all}.ax .cn{width:16%!important;font-size:12px;text-align:left!important;padding-left:4px!important}.ax .no{width:4%!important}
 @media print{body{background:#fff}.bar{display:none}.pgw{width:793.7px!important;height:1122.5px!important}.pg{transform:scale(.8722)!important}.sub{page-break-before:always;margin:0;padding:24px}@page{size:A4;margin:0}}
 </style></head><body>
 <div class="bar"><button onclick="window.print()">印刷 / PDF保存</button><button onclick="saveJpg()">画像（JPG）で保存</button></div>
@@ -30,7 +30,7 @@ const dec = t => JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,"+").r
 const cnt = s => Object.keys(s).reduce((a, k) => a + s[k], 0);
 let d = null;
 const IDS = ["want","asap","use","evt","evtx","school","schoolk","cls","clsk","stel","sfax","rep","repk","rept","mob","tutor","ztype","zip","addr","rname","rtel","disc","minna","rpt","budget","memo","p_front_size","p_front_h","p_front_w","p_front_ink","p_front_font","p_front_samp","p_back_size","p_back_h","p_back_w","p_back_ink","p_back_font","p_back_samp","p_sleeve_side","p_sleeve_size","p_sleeve_h","p_sleeve_w","p_sleeve_ink","p_sleeve_font","p_sleeve_samp","p_other_size","p_other_h","p_other_w","p_other_ink","p_other_font","p_other_samp"];
-try { const z = dec(location.hash.slice(3)); d = {pn: z.p, sz: z.sz, q: z.q, t: z.t, w: z.w, d: z.d, r: [], c: z.c.map(a => ({c: a[0], s: a[1]})), f: {}}; Object.keys(z.f).forEach(i => { d.f[IDS[i]] = z.f[i]; }); } catch (e) {}
+try { const z = dec(location.hash.slice(3)); d = {pn: z.p, sz: z.sz, q: z.q, t: z.t, w: z.w, d: z.d, e: z.e || 0, r: [], c: z.c.map(a => ({c: a[0], s: a[1]})), f: {}}; Object.keys(z.f).forEach(i => { d.f[/^\d+$/.test(i) ? IDS[i] : i] = z.f[i]; }); } catch (e) {}
 if (!d) { $("#pgw").innerHTML = '<p style="padding:20px">注文データが見つかりません。LINEのメッセージのリンクから開いてください。</p>'; $(".bar").remove(); }
 else {
 const f = d.f, v = k => { const x = f[k]; return Array.isArray(x) ? x.join("、") : x === true ? "はい" : (x || ""); };
@@ -50,7 +50,7 @@ const EV = {"学園祭": [286, 174], "球技大会": [339, 174], "部活・サ�
 if (EV[f.evt]) K(EV[f.evt][0], EV[f.evt][1]);
 T(405, 189, 75, v("evtx"), 12);
 if (d.w === "80") K(525, 62); if (d.w === "50") K(525, 99);
-const DS = {"みんな割": [607, 60], "リピ割": [802, 58], "#タグ付け割": [525, 130], "アンケート割": [525, 159], "メディアぷらす": [525, 187]};
+const DS = {"みんな割": [607, 60], "リピ割": [802, 58], "#タグ付け割": [525, 130], "タグ付け割": [525, 130], "アンケート割": [525, 159], "メディアぷらす": [525, 187]};
 (f.disc || []).forEach(x => { if (DS[x]) K(DS[x][0], DS[x][1]); });
 T(698, 66, 88, v("minna"), 11); T(792, 112, 72, v("rpt"), 12);
 T(140, 246, 430, v("school"), 24); T(152, 222, 420, v("schoolk"), 11);
@@ -91,6 +91,7 @@ d.c.slice(0, 3).forEach((r, i) => {
   C(848, y, 40, cnt(r.s), 17);
 });
 K(865, 768);
+if (d.c.length > 3) { const n = d.c.length; T(46, 764, 400, "※商品カラーが" + n + "色のため、全色は別紙参照（全" + n + "色）", 14, 0, "#d92d20"); }
 const P = {front: {x: 114, w: 225, o: 0}, back: {x: 352, w: 225, o: 239}, sleeve: {x: 592, w: 165}, other: {x: 771, w: 95}};
 Object.keys(P).forEach(k => {
   const g = a => f["p_" + k + "_" + a] || "", p = P[k];
@@ -105,15 +106,24 @@ Object.keys(P).forEach(k => {
     if (g("side") === "左袖" || g("side") === "両袖") O(733, 806, 46, 22);
   } else if (g("h") || g("w")) T(771, 1000, 95, "縦" + g("h") + "×横" + g("w") + "cm", 11);
 });
-T(770, 850, 96, f.memo ? "【ご要望】" + f.memo : "", 11, "w");
+T(770, 850, 96, [f.name_ink ? "【ネーム・ゼッケン色】" + v("name_ink") : "", f.memo ? "【ご要望】" + f.memo : ""].filter(Boolean).join(" "), 11, "w");
 if (v("budget")) C(783, 1170, 92, v("budget"), 18);
 $("#ov").innerHTML = H;
 document.title = "注文書_" + (f.school || "") + (f.cls ? "_" + f.cls : "");
 $("#sub").innerHTML = "<b>見積内訳（社内用）</b>　受付日：" + esc(d.d) + "<table><tr><th>商品</th><td colspan='2'>" + esc(d.pn) + "　" + d.q + "枚</td></tr>" +
   d.r.map(r => "<tr><td colspan='2'>" + esc(r[0]) + "</td><td class='r'>" + (r[1] < 0 ? "-" : "") + yen(Math.abs(r[1])) + "</td></tr>").join("") +
   "<tr><th colspan='2'>サイズ内訳</th><td class='r' style='white-space:normal;text-align:left'>" + d.c.map(r => esc(r.c) + "：" + Object.keys(r.s).map(k => (SZLAB[k] ? k + "(" + SZLAB[k] + ")" : k) + " " + r.s[k]).join("、")).join("<br>") + "</td></tr>" +
-  "<tr><th colspan='2'>概算合計（税込）</th><td class='r'><b>" + yen(d.t) + "</b></td></tr></table>" +
-  "<p>通常インクの場合の概算です。みんな割などの特典は、内容を確認のうえ適用してください。</p>";
+  "<tr><th colspan='2'>概算合計（税込）</th><td class='r'><b>" + (d.t == null ? "見積りなし" : yen(d.t)) + "</b></td></tr></table>" +
+  "<p>通常インクの場合の概算です。みんな割などの特典は、内容を確認のうえ適用してください。</p>" +
+  (d.e ? "<p style='color:#d92d20;font-weight:700'>※注文内容の枚数（" + d.q + "枚）が、見積りの枚数（" + d.e + "枚）と異なります。注文内容の枚数で進めてください。</p>" : "") +
+  (f.dack ? "<p>条件を了承済みの特典：" + esc(v("dack")) + "</p>" : "") + (f.spec ? "<p>特殊インク（追加料金・見積りに含まれません）：" + esc(v("spec")) + "</p>" : "") + (f.rpt ? "<p>リピ割：" + esc(v("rpt")) + "</p>" : "");
+if (d.c.length > 3) {
+  const ks = d.sz || [], hd = "<tr><th class='no'>No.</th><th class='cn'>商品カラー</th>" + ks.map(k => "<th style='width:auto;text-align:center'>" + esc(SZLAB[k] ? k + "(" + SZLAB[k] + ")" : k) + "</th>").join("") + "<th style='width:auto'>計</th></tr>";
+  const tot = {}; d.c.forEach(r => Object.keys(r.s).forEach(k => { tot[k] = (tot[k] || 0) + r.s[k]; }));
+  $("#sub").insertAdjacentHTML("afterend", "<div class='sub'><b>別紙：商品カラー・サイズ別の枚数</b>　" + esc(f.school || "") + " " + esc(f.cls || "") + "　" + esc(d.pn) + "<table class='ax'>" + hd +
+    d.c.map((r, i) => "<tr><td>" + (i + 1) + "</td><td class='cn'>" + esc(r.c) + "</td>" + ks.map(k => "<td class='r'>" + (r.s[k] || "") + "</td>").join("") + "<td class='r'>" + cnt(r.s) + "</td></tr>").join("") +
+    "<tr><th style='width:auto' colspan='2'>合計</th>" + ks.map(k => "<td class='r'>" + (tot[k] || "") + "</td>").join("") + "<td class='r'><b>" + d.q + "</b></td></tr></table></div>");
+}
 const fitView = () => { const s = Math.min(1, innerWidth / 910); $("#pg").style.transform = "scale(" + s + ")"; $("#pgw").style.width = 910 * s + "px"; $("#pgw").style.height = 1286 * s + "px"; };
 fitView(); addEventListener("resize", fitView);
 }
