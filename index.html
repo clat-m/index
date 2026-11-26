@@ -255,7 +255,7 @@ dmsg.map(m=>'<p class="warn" style="font-size:.8rem">' + m + '</p>').join("")+(D
 $("prod").addEventListener("input",buildForm);
 $("qty").addEventListener("input",calc);
 buildForm();
-{const q=new URLSearchParams(location.search).get("item"),i=DATA.findIndex(d=>d.n===q);if(i>=0){$("prod").value=i;buildForm();}}
+{const g=u=>{try{return new URL(u).searchParams.get("item");}catch(e){return null;}},h=location.hash.match(/item=([^&]+)/),q=g(location.href)||g(document.referrer)||(h?decodeURIComponent(h[1]):""),i=DATA.findIndex(d=>d.n===q);if(i>=0){$("prod").value=i;buildForm();}}
 </script>
 </body>
 </html>
