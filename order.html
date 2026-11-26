@@ -444,6 +444,7 @@ calc(); syncD();
 $("prod").addEventListener("input", buildForm);
 $("qty").addEventListener("input", calc);
 buildForm();
+{ const q = new URLSearchParams(location.search).get("item"), i = DATA.findIndex(d => d.n === q); if (i >= 0){ $("prod").value = i; buildForm(); } }
 $("dsn").href = DESIGN_URL;
 if (/^#e=/.test(location.hash)) { try { stRestore(dec(location.hash.slice(3))); } catch (e) {} }
 const SITE="https://clat-m.com";

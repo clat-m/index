@@ -255,6 +255,7 @@ dmsg.map(m=>'<p class="warn" style="font-size:.8rem">' + m + '</p>').join("")+(D
 $("prod").addEventListener("input",buildForm);
 $("qty").addEventListener("input",calc);
 buildForm();
+{const q=new URLSearchParams(location.search).get("item"),i=DATA.findIndex(d=>d.n===q);if(i>=0){$("prod").value=i;buildForm();}}
 </script>
 </body>
 </html>
